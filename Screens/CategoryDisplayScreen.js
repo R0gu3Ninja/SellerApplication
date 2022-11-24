@@ -9,7 +9,12 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import HeaderIcons from "../Components/HeaderIcons";
-
+import {
+  Ionicons,
+  Foundation,
+  FontAwesome,
+  Material,
+} from "@expo/vector-icons";
 const CategoryScreenTabs = () => {
   return (
     <Tab.Navigator>
@@ -32,7 +37,7 @@ const CategoryDisplayScreen = () => {
   const navigation = useNavigation();
   return (
     <>
-      <View>
+      <View style={styles.container}>
         <FlatList
           data={productImages}
           renderItem={({ item }) => (
@@ -53,6 +58,18 @@ const CategoryDisplayScreen = () => {
           keyExtractor={(item, index) => index}
         />
       </View>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttons}>
+          <Foundation name="list" size={30}>
+            sort{" "}
+          </Foundation>
+        </View>
+        <View style={styles.buttons}>
+          <Foundation name="filter" size={30}>
+            filter{" "}
+          </Foundation>
+        </View>
+      </View>
     </>
   );
 };
@@ -66,6 +83,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 300,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    borderColor: "#fff",
+    justifyContent: "center",
+  },
+  buttons: {
+    flex: 1,
   },
 });
 export default CategoryDisplayScreen;

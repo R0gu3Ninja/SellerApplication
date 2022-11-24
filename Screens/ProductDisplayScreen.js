@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   View,
   Image,
-  FlatList,
+  ScrollView,
+  Pressable,
 } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import productImages from "../Images/productImages";
@@ -14,6 +15,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import WishList from "../Components/WishList";
 import Cart from "../Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons, Foundation } from "@expo/vector-icons";
 
 const addItemToWishList = () => {
   console.log("Added to WishList");
@@ -39,8 +41,8 @@ const ProductScreenTabs = () => {
 const ProductDisplayScreen = () => {
   return (
     <>
-      <View style={styles.productCarousel}>
-        <View>
+      <View style={styles.container}>
+        <View style={styles.productCarousel}>
           <FlatListSlider
             data={productImages}
             height={500}
@@ -54,16 +56,26 @@ const ProductDisplayScreen = () => {
             animation
           />
         </View>
-        <View style={styles.description}>
+        <ScrollView style={styles.scrollView}>
           <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+          <Text>Product Description</Text>
+        </ScrollView>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttons}>
+          <Ionicons name="heart" size={30} onPress={addItemToWishList} />
         </View>
         <View style={styles.buttons}>
-          <HeaderIcons
-            iconname="heart"
-            text="WishList"
-            onPress={addItemToWishList}
-          />
-          <HeaderIcons iconname="cart" text="Cart" onPress={addItemToCart} />
+          <Ionicons name="cart" size={30} onPress={addItemToCart} />
+        </View>
+        <View style={styles.buttons}>
+          <Foundation name="share" size={30} onPress={addItemToCart} />
         </View>
       </View>
     </>
@@ -79,19 +91,21 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     alignContent: "center",
   },
-  description: {
-    alignItems: "center",
+  scrollView: {
     maxHeight: 200,
     maxWidth: 400,
   },
-  buttons: {
+  buttonsContainer: {
     flexDirection: "row",
     borderColor: "#fff",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+  },
+  buttons: {
+    flex: 1,
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "white",
   },
   imageThumbnail: {
