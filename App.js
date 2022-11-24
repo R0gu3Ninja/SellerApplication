@@ -1,5 +1,4 @@
 import "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,24 +6,17 @@ import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
 import CategoryDisplayScreen from "./Screens/CategoryDisplayScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import HeaderIcons from "./Components/HeaderIcons";
-import logo from "./local.png";
+import logo from "./local.jpg";
 import WishList from "./Components/WishList";
 import Cart from "./Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import AccountScreen from "./Components/AccountScreen";
-import Filter from "./Components/Filter";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const openWishList = () => {
-  console.log("Opening Wishlist");
-};
-const openCart = () => {
-  console.log("Opening Cart");
-};
 const HomeScreenDrawer = () => {
   return (
     <Drawer.Navigator
