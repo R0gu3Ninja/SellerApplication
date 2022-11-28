@@ -1,29 +1,23 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import productImages from "../Images/productImages";
-import HeaderIcons from "../Components/HeaderIcons";
-import { NavigationContainer } from "@react-navigation/native";
-import WishList from "../Components/WishList";
-import Cart from "../Components/Cart";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, Foundation } from "@expo/vector-icons";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishList } from "../Store/wishlist";
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
-  const productId = route.params.productId;
-  console.log("Product Id :" + productId);
+  const item = route.params.item;
+  const dispatch = useDispatch();
+  console.log("Product Id :" + item);
+  const wishListItems = useSelector((state) => state.wishListReducer);
+  console.log("wishListItems  :" + wishListItems);
+
   const addItemToWishList = () => {
-    console.log("Added to WishList id: " + productId);
+    console.log("Added to WishList id: " + item);
+    dispatch(addToWishList({ item: item }));
   };
+
   const addItemToCart = () => {
     console.log("Added to Cart");
   };
@@ -57,7 +51,11 @@ const ProductDisplayScreen = ({ route }) => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttons}>
-          <Ionicons name="heart" size={30} onPress={addItemToWishList} />
+          <Ionicons
+            name="heart-outline"
+            size={30}
+            onPress={addItemToWishList}
+          />
         </View>
         <View style={styles.buttons}>
           <Ionicons name="cart" size={30} onPress={addItemToCart} />

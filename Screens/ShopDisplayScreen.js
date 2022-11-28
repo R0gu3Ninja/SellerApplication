@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import productImages from "../Images/productImages";
+
 const ShopDisplayScreen = ({ route }) => {
   const navigation = useNavigation();
   console.log("Displaying shop" + route.params.shopId);
