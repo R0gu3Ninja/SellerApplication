@@ -2,32 +2,47 @@
   "expo": {
     "name": "Homescreen",
     "slug": "Homescreen",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/local.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/local.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/local.jpg",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.jayendrabhaskar.Homescreen"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/local.jpg"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "04aa0fe8-f7ee-4edc-b354-f4ffe5cda80b"
+      },
+      "firebase": {
+        "apiKey": "AIzaSyBRpGsKKV27WJdgmqhU1HMTA0ki8sDeIbQ",
+        "authDomain": "signin-d4d32.firebaseapp.com",
+        "projectId": "signin-d4d32",
+        "storageBucket": "signin-d4d32.appspot.com",
+        "messagingSenderId": "238728598242",
+        "appId": "1:238728598242:web:f0fe21f4f10144a3ec84bb",
+        "measurementId": "G-4H0QEER3V5"
+      }
     }
   }
 }

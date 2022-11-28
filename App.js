@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
-import { StyleSheet, Text, View, Image } from "react-native";
+import "expo-dev-client";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
@@ -12,11 +13,24 @@ import Cart from "./Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import AccountScreen from "./Components/AccountScreen";
-
+import { Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
+import Provider from "react-redux";
+import globalStore from "./Store";
+import LogoutScreen from "./Login/LogoutScreen";
+import PhoneAuth from "./Login/PhoneAuth";
+import Login from "./Login/Login";
+import Camera from "./Camera/Camera";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+const onCartIconPressHandler = () => {
+  console.log("Displaying Cart Items");
+};
+
+const onWishListIconPressHandler = () => {
+  console.log("Displaying WishList Items");
+};
 const HomeScreenDrawer = () => {
   return (
     <Drawer.Navigator
@@ -25,8 +39,12 @@ const HomeScreenDrawer = () => {
         headerRight: () => {
           return (
             <View style={styles.headerIcons}>
-              <HeaderIcons iconname="cart" />
-              <HeaderIcons iconname="heart-outline" />
+              <HeaderIcons iconname="cart" onPress={onCartIconPressHandler} />
+
+              <HeaderIcons
+                iconname="heart-outline"
+                onPress={onWishListIconPressHandler}
+              />
               <HeaderIcons iconname="search" />
             </View>
           );
@@ -38,7 +56,9 @@ const HomeScreenDrawer = () => {
         component={HomeScreenTabs}
         options={{ headerShown: true }}
       />
-      <Drawer.Screen name="Article" component={AccountScreen} />
+      <Drawer.Screen name="Logout" component={PhoneAuth} />
+      <Drawer.Screen name="Orders" component={Camera} />
+      <Drawer.Screen name="Profile" component={Camera} />
     </Drawer.Navigator>
   );
 };
@@ -48,11 +68,52 @@ const HomeScreenTabs = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => {
+            return <Foundation name="home" size={30}></Foundation>;
+          },
+        }}
       />
-      <Tab.Screen name="Accounts" component={AccountScreen} />
-      <Tab.Screen name="WishList" component={WishList} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen
+        name="Accounts"
+        component={AccountScreen}
+        options={() => ({
+          tabBarIcon: () => {
+            return (
+              <MaterialCommunityIcons
+                name="account-details"
+                size={24}
+                color="black"
+              />
+            );
+          },
+        })}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={Camera}
+        options={() => ({
+          tabBarIcon: () => {
+            return (
+              <MaterialCommunityIcons
+                name="qrcode-scan"
+                size={24}
+                color="black"
+              />
+            );
+          },
+        })}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={() => ({
+          tabBarIcon: () => {
+            return <Foundation name="shopping-cart" size={30}></Foundation>;
+          },
+        })}
+      />
     </Tab.Navigator>
   );
 };
@@ -97,8 +158,10 @@ export default function App() {
             name="CategoryDisplayScreen"
             component={CategoryDisplayScreen}
           />
-          <Stack.Screen name="WishList" component={WishList} />
-          <Stack.Screen name="Cart" component={Cart} />
+
+          <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Camera" component={Camera} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

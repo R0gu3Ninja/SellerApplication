@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "238728598242",
+    "project_id": "signin-d4d32",
+    "storage_bucket": "signin-d4d32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238728598242:android:bb3088b82a1ef470ec84bb",
+        "android_client_info": {
+          "package_name": "com.jayendrabhaskar.Homescreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238728598242-1d8n9p50kfegto1kbi9c08e3slv5im15.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jayendrabhaskar.Homescreen",
+            "certificate_hash": "b45d5b46479472526c866a02dd604bc13128c8ee"
+          }
+        },
+        {
+          "client_id": "238728598242-inp7acqtqe64nquiuq58s44tq9cs2cbj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jayendrabhaskar.Homescreen",
+            "certificate_hash": "96dd36eae4ebb54163c3cc289835cb63c5c52180"
+          }
+        },
+        {
+          "client_id": "238728598242-pj30qnorftvbnqokhb9i7m1ci14pb34r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodBGTeIwBn7u15EGMQjYnBHxdpJcYUsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238728598242-pj30qnorftvbnqokhb9i7m1ci14pb34r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
