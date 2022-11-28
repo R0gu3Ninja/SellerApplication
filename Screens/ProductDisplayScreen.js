@@ -17,28 +17,16 @@ import Cart from "../Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 
-const addItemToWishList = () => {
-  console.log("Added to WishList");
-};
-const addItemToCart = () => {
-  console.log("Added to Cart");
-};
-const Tab = createBottomTabNavigator();
-const ProductScreenTabs = () => {
-  return (
-    <Tab.Navigator lazy="true">
-      <Tab.Screen
-        lazy="true"
-        name="WishList"
-        component={WishList}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen name="Cart" component={Cart} />
-    </Tab.Navigator>
-  );
-};
-
-const ProductDisplayScreen = () => {
+const ProductDisplayScreen = ({ route }) => {
+  console.log("Inside ProductDisplayScreen");
+  const productId = route.params.productId;
+  console.log("Product Id :" + productId);
+  const addItemToWishList = () => {
+    console.log("Added to WishList id: " + productId);
+  };
+  const addItemToCart = () => {
+    console.log("Added to Cart");
+  };
   return (
     <>
       <View style={styles.container}>

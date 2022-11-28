@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
 import CategoryDisplayScreen from "./Screens/CategoryDisplayScreen";
+import ShopDisplayScreen from "./Screens/ShopDisplayScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import HeaderIcons from "./Components/HeaderIcons";
 import logo from "./local.jpg";
@@ -20,18 +21,14 @@ import LogoutScreen from "./Login/LogoutScreen";
 import PhoneAuth from "./Login/PhoneAuth";
 import Login from "./Login/Login";
 import Camera from "./Camera/Camera";
+import { useNavigation } from "@react-navigation/native";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const onCartIconPressHandler = () => {
-  console.log("Displaying Cart Items");
-};
-
-const onWishListIconPressHandler = () => {
-  console.log("Displaying WishList Items");
-};
 const HomeScreenDrawer = () => {
+  const navigation = useNavigation();
   return (
     <Drawer.Navigator
       useLegacyImplementation={true}
@@ -39,11 +36,13 @@ const HomeScreenDrawer = () => {
         headerRight: () => {
           return (
             <View style={styles.headerIcons}>
-              <HeaderIcons iconname="cart" onPress={onCartIconPressHandler} />
-
+              <HeaderIcons
+                iconname="notifications"
+                onPress={() => navigation.navigate("Cart")}
+              />
               <HeaderIcons
                 iconname="heart-outline"
-                onPress={onWishListIconPressHandler}
+                onPress={() => navigation.navigate("WishList")}
               />
               <HeaderIcons iconname="search" />
             </View>
@@ -59,6 +58,8 @@ const HomeScreenDrawer = () => {
       <Drawer.Screen name="Logout" component={PhoneAuth} />
       <Drawer.Screen name="Orders" component={Camera} />
       <Drawer.Screen name="Profile" component={Camera} />
+      <Drawer.Screen name="Support" component={Camera} />
+      <Drawer.Screen name="Contactus" component={Camera} />
     </Drawer.Navigator>
   );
 };
@@ -129,7 +130,7 @@ export default function App() {
             headerRight: () => {
               return (
                 <View style={styles.headerIcons}>
-                  <HeaderIcons iconname="cart" />
+                  <HeaderIcons iconname="notifications" />
                   <HeaderIcons iconname="heart-outline" />
                   <HeaderIcons iconname="search" />
                 </View>
@@ -158,7 +159,12 @@ export default function App() {
             name="CategoryDisplayScreen"
             component={CategoryDisplayScreen}
           />
-
+          <Stack.Screen
+            name="ShopDisplayScreen"
+            component={ShopDisplayScreen}
+          />
+          <Stack.Screen name="WishList" component={WishList} />
+          <Stack.Screen name="Cart" component={Cart} />
           <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Camera" component={Camera} />

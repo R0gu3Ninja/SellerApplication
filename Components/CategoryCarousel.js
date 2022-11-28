@@ -7,11 +7,9 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import images from "../images";
+import images from "../Images/productImages";
 import MyPhoto from "../shirt.jpg";
-import categories from "./categories";
 import { useNavigation } from "@react-navigation/native";
-const renderCategories = () => {};
 const CategoryCarousel = (props) => {
   const navigation = useNavigation();
   return (
