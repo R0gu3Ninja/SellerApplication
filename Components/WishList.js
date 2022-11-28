@@ -1,17 +1,20 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   Image,
+  Text,
   FlatList,
 } from "react-native";
-import productImages from "../Images/productImages";
+import { useSelector } from "react-redux";
 const WishList = () => {
   const navigation = useNavigation();
-  const [wishListItems, setWishListItems] = useState([]);
+  const wishListItems = useSelector(
+    (state) => state.wishListReducer.wishListItems
+  );
+
   return (
     <>
       <View style={styles.container}>

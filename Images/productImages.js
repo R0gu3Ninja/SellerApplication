@@ -1,6 +1,6 @@
 const images = [
   {
-    productId: 1,
+    productId: "1",
     shopId: "1",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -10,7 +10,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 4,
+    productId: "4",
     shopId: "11",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -20,7 +20,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 5,
+    productId: "5",
     shopId: "12",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -30,7 +30,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 6,
+    productId: "6",
     shopId: "13",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -40,7 +40,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 7,
+    productId: "7",
     shopId: "14",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -50,7 +50,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 8,
+    productId: "8",
     shopId: "15",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -60,7 +60,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 9,
+    productId: "9",
     shopId: "4",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw2.jpg",
     desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",
@@ -70,7 +70,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 10,
+    productId: "10",
     shopId: "5",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -80,7 +80,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 11,
+    productId: "11",
     shopId: "7",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw4.jpg",
     desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",
@@ -90,7 +90,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 12,
+    productId: "12",
     shopId: "8",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw5.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -100,7 +100,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 13,
+    productId: "13",
     shopId: "1",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
     desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",
@@ -110,7 +110,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 14,
+    productId: "14",
     shopId: "9",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg",
     desc: "Silent Waters in the mountains in midst of Himilayas",
@@ -120,7 +120,7 @@ const images = [
     discountPrice: "350",
   },
   {
-    productId: 15,
+    productId: "15",
     shopId: "10",
     image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw4.jpg",
     desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",

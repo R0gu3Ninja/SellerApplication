@@ -15,8 +15,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import AccountScreen from "./Components/AccountScreen";
 import { Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
-import Provider from "react-redux";
-import globalStore from "./Store";
+import { Provider } from "react-redux";
+import globalStore from "./Store/index";
 import LogoutScreen from "./Login/LogoutScreen";
 import PhoneAuth from "./Login/PhoneAuth";
 import Login from "./Login/Login";
@@ -122,54 +122,56 @@ const HomeScreenTabs = () => {
 export default function App() {
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            title: "",
-            headerTitleAlign: "center",
-            headerRight: () => {
-              return (
-                <View style={styles.headerIcons}>
-                  <HeaderIcons iconname="notifications" />
-                  <HeaderIcons iconname="heart-outline" />
-                  <HeaderIcons iconname="search" />
-                </View>
-              );
-            },
-            headerLeft: () => {
-              return (
-                <View style={styles.logo}>
-                  <Image style={styles.image} source={logo} />
-                  <Text style={styles.logoText}>Local</Text>
-                </View>
-              );
-            },
-          }}
-        >
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreenDrawer}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ProductDisplayScreen"
-            component={ProductDisplayScreen}
-          />
-          <Stack.Screen
-            name="CategoryDisplayScreen"
-            component={CategoryDisplayScreen}
-          />
-          <Stack.Screen
-            name="ShopDisplayScreen"
-            component={ShopDisplayScreen}
-          />
-          <Stack.Screen name="WishList" component={WishList} />
-          <Stack.Screen name="Cart" component={Cart} />
-          <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Camera" component={Camera} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={globalStore}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              title: "",
+              headerTitleAlign: "center",
+              headerRight: () => {
+                return (
+                  <View style={styles.headerIcons}>
+                    <HeaderIcons iconname="notifications" />
+                    <HeaderIcons iconname="heart-outline" />
+                    <HeaderIcons iconname="search" />
+                  </View>
+                );
+              },
+              headerLeft: () => {
+                return (
+                  <View style={styles.logo}>
+                    <Image style={styles.image} source={logo} />
+                    <Text style={styles.logoText}>Local</Text>
+                  </View>
+                );
+              },
+            }}
+          >
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreenDrawer}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProductDisplayScreen"
+              component={ProductDisplayScreen}
+            />
+            <Stack.Screen
+              name="CategoryDisplayScreen"
+              component={CategoryDisplayScreen}
+            />
+            <Stack.Screen
+              name="ShopDisplayScreen"
+              component={ShopDisplayScreen}
+            />
+            <Stack.Screen name="WishList" component={WishList} />
+            <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Camera" component={Camera} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

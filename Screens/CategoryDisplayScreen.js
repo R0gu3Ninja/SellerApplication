@@ -43,11 +43,12 @@ const CategoryDisplayScreen = () => {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.container}
-              onPress={() =>
+              onPress={() => {
+                console.log("Insided Categorydisplay :" + item);
                 navigation.navigate("ProductDisplayScreen", {
-                  productId: item.productId,
-                })
-              }
+                  item: item,
+                });
+              }}
             >
               <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
                 <Image

@@ -14,9 +14,10 @@ const ProductCarousel = (props) => {
         height={500}
         timer={5000}
         onPress={(item) => {
-          console.log("item :" + item);
+          console.log("Index is : " + item);
+
           navigator.navigate("ProductDisplayScreen", {
-            productId: item.productId,
+            item: productImages[item],
           });
         }}
         contentContainerStyle={{ paddingHorizontal: 0 }}
