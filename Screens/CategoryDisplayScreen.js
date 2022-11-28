@@ -12,8 +12,8 @@ import HeaderIcons from "../Components/HeaderIcons";
 import {
   Ionicons,
   Foundation,
-  FontAwesome,
-  Material,
+  AntDesign,
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 const CategoryScreenTabs = () => {
   return (
@@ -60,14 +60,10 @@ const CategoryDisplayScreen = () => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttons}>
-          <Foundation name="list" size={30}>
-            sort{" "}
-          </Foundation>
+          <MaterialCommunityIcons name="sort" size={30} color="black" />
         </View>
         <View style={styles.buttons}>
-          <Foundation name="filter" size={30}>
-            filter{" "}
-          </Foundation>
+          <AntDesign name="filter" size={30} color="black" />
         </View>
       </View>
     </>
