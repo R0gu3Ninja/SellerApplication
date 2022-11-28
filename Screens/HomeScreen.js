@@ -4,21 +4,17 @@ import ProductCarousel from "../Components/ProductCarousel";
 import ShopCarousel from "../Components/ShopCarousel";
 import CategoryCarousel from "../Components/CategoryCarousel";
 
-const onHeaderPressHandler = () => {
-  console.log("Header Button PressNNNr");
-};
-
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <View>
-          <CategoryCarousel goto={navigation} />
+          <CategoryCarousel />
         </View>
         <View style={styles.scrollview}>
           <ScrollView>
             <View>
-              <ProductCarousel goto={navigation} />
+              <ProductCarousel />
             </View>
             <View>
               <ShopCarousel />

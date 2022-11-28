@@ -12,7 +12,6 @@ import Constants from "expo-constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import firebase from "../firebase";
-import HomeScreen from "../Screens/HomeScreen";
 
 const PhoneAuth = () => {
   const [phoneNumber, setPhoneNumber] = useState("");

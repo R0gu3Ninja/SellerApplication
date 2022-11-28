@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Homescreen",
+    "name": "Local",
     "slug": "Homescreen",
     "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",

@@ -2,12 +2,14 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { React, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-
+import { useIsFocused } from "@react-navigation/native";
 export default function Camera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -22,10 +24,11 @@ export default function Camera() {
 
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
+    console.log("inside handleBarCodeScanned");
     setScanned(true);
-    setText(data);
+
     console.log("Type: " + type + "\nData: " + data);
-    navigation.navigate("CategoryDisplayScreen");
+    navigation.navigate("ShopDisplayScreen", { shopId: data });
   };
 
   // Check permissions and return the screens
@@ -52,19 +55,16 @@ export default function Camera() {
   return (
     <View style={styles.container}>
       <View style={styles.barcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
-        />
+        {isFocused ? (
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={StyleSheet.absoluteFillObject}
+          />
+        ) : null}
       </View>
       <Text style={styles.maintext}>{text}</Text>
-
       {scanned && (
-        <Button
-          title={"Scan again?"}
-          onPress={() => setScanned(false)}
-          color="tomato"
-        />
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
     </View>
   );

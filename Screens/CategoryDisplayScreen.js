@@ -39,11 +39,15 @@ const CategoryDisplayScreen = () => {
     <>
       <View style={styles.container}>
         <FlatList
-          data={productImages}
+          data={productImages.filter((item) => item.category === "t-shirt")}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.container}
-              onPress={() => navigation.navigate("ProductDisplayScreen")}
+              onPress={() =>
+                navigation.navigate("ProductDisplayScreen", {
+                  productId: item.productId,
+                })
+              }
             >
               <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
                 <Image
