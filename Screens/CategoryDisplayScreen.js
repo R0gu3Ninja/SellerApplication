@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import HeaderIcons from "../Components/HeaderIcons";
+import BottomSheet from "../Components/BottomSheet";
 import {
   Ionicons,
   Foundation,
@@ -32,6 +33,7 @@ const CategoryDisplayScreen = () => {
     setOnClick(true);
   };
   const navigation = useNavigation();
+
   return (
     <>
       {!onclick && (
@@ -106,12 +108,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
-    left: 40,
-  },
-  verticleLine: {
-    height: "100%",
-    width: 1,
-    backgroundColor: "#909090",
   },
 });
 export default CategoryDisplayScreen;

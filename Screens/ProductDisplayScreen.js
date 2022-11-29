@@ -15,6 +15,7 @@ const ProductDisplayScreen = ({ route }) => {
   const [addedToWishList, setAddedToWishList] = useState(false);
   const addItemToWishList = () => {
     console.log("Added to WishList id: " + item);
+    setAddedToWishList(true);
     dispatch(addToWishList({ item: item }));
     setAddedToWishList(true);
   };
@@ -23,6 +24,12 @@ const ProductDisplayScreen = ({ route }) => {
     dispatch(removeFromWishList({ item: item }));
     setAddedToWishList(false);
   };
+  const removeItemFromWishList = () => {
+    console.log("Removing from WishList item: " + item);
+    dispatch(removeFromWishList({ item: item }));
+    setAddedToWishList(false);
+  };
+
   const addItemToCart = () => {
     console.log("Added to Cart");
   };
