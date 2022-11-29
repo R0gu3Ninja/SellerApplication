@@ -23,7 +23,9 @@ const WishList = () => {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.container}
-              onPress={() => navigation.navigate("ProductDisplayScreen")}
+              onPress={() =>
+                navigation.navigate("ProductDisplayScreen", { item: item })
+              }
             >
               <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
                 <Image

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   View,
   Image,
   FlatList,
+  Text,
 } from "react-native";
 import productImages from "../Images/productImages";
 import HeaderIcons from "../Components/HeaderIcons";
@@ -15,62 +16,75 @@ import {
   AntDesign,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-const CategoryScreenTabs = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Root"
-        component={CategoryDisplayScreen}
-        options={{ headerShown: false, display: "none" }}
-      />
-      <Tab.Screen
-        name="Sort"
-        component={Filter}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen name="Filter" component={Filter} />
-    </Tab.Navigator>
-  );
-};
+import FilterMenu from "../Components/FilterMenu";
+import BottomModal from "../Components/BottomModal";
 
 const CategoryDisplayScreen = () => {
+  const [onclick, setOnClick] = useState(false);
+  const [screen, setScreen] = useState();
+
+  const showSortOptions = () => {
+    setScreen(<BottomModal />);
+    setOnClick(true);
+  };
+  const showFilterOptions = () => {
+    setScreen(<FilterMenu />);
+    setOnClick(true);
+  };
   const navigation = useNavigation();
   return (
     <>
-      <View style={styles.container}>
-        <FlatList
-          data={productImages.filter((item) => item.category === "t-shirt")}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => {
-                console.log("Insided Categorydisplay :" + item);
-                navigation.navigate("ProductDisplayScreen", {
-                  item: item,
-                });
-              }}
-            >
-              <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-                <Image
-                  style={styles.imageThumbnail}
-                  source={{ uri: item.image }}
-                />
-              </View>
-            </TouchableOpacity>
-          )}
-          //Setting the number of column
-          numColumns={2}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttons}>
-          <MaterialCommunityIcons name="sort" size={30} color="black" />
+      {!onclick && (
+        <View style={styles.container}>
+          <FlatList
+            data={productImages.filter((item) => item.category === "t-shirt")}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => {
+                  console.log("Insided Categorydisplay :" + item);
+                  navigation.navigate("ProductDisplayScreen", {
+                    item: item,
+                  });
+                }}
+              >
+                <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
+                  <Image
+                    style={styles.imageThumbnail}
+                    source={{ uri: item.image }}
+                  />
+                </View>
+              </TouchableOpacity>
+            )}
+            //Setting the number of column
+            numColumns={2}
+            keyExtractor={(item, index) => index}
+          />
         </View>
-        <View style={styles.buttons}>
-          <AntDesign name="filter" size={30} color="black" />
+      )}
+
+      {!onclick && (
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttons}>
+            <MaterialCommunityIcons
+              name="sort"
+              size={30}
+              color="black"
+              onPress={showSortOptions}
+            />
+          </View>
+          <View style={styles.verticleLine}></View>
+          <View style={styles.buttons}>
+            <AntDesign
+              name="filter"
+              size={30}
+              color="black"
+              onPress={showFilterOptions}
+            />
+          </View>
         </View>
-      </View>
+      )}
+      {onclick && screen}
     </>
   );
 };
@@ -92,6 +106,12 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
+    left: 40,
+  },
+  verticleLine: {
+    height: "100%",
+    width: 1,
+    backgroundColor: "#909090",
   },
 });
 export default CategoryDisplayScreen;
