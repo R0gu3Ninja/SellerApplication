@@ -3,6 +3,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { React, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useIsFocused } from "@react-navigation/native";
+
 export default function Camera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);

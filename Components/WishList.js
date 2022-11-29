@@ -5,33 +5,56 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Text,
+  Button,
   FlatList,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import HeaderIcons from "./HeaderIcons";
+import { Ionicons } from "@expo/vector-icons";
+import { removeItemFromWishList } from "../Store/wishlist";
+
 const WishList = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const wishListItems = useSelector(
     (state) => state.wishListReducer.wishListItems
   );
-
+  const removeItemFromWishListHandler = () => {
+    console.log("removeItemFromWishListHandler");
+    dispatch(removeItemFromWishList({ item: item }));
+  };
   return (
     <>
       <View style={styles.container}>
         <FlatList
           data={wishListItems}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("ProductDisplayScreen")}
-            >
-              <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-                <Image
-                  style={styles.imageThumbnail}
-                  source={{ uri: item.image }}
-                />
+            <View style={styles.container}>
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("ProductDisplayScreen", {})}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    margin: 1,
+                  }}
+                >
+                  <Image
+                    style={styles.imageThumbnail}
+                    source={{ uri: item.image }}
+                  />
+                </View>
+              </TouchableOpacity>
+              <View>
+                <Button title="move to Cart"></Button>
+                <Button
+                  title="Remove"
+                  onPress={removeItemFromWishListHandler}
+                ></Button>
               </View>
-            </TouchableOpacity>
+            </View>
           )}
           //Setting the number of column
           numColumns={2}

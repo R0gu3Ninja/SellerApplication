@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import productImages from "../Images/productImages";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishList } from "../Store/wishlist";
+import { addToWishList, removeFromWishList } from "../Store/wishlist";
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
@@ -12,10 +12,16 @@ const ProductDisplayScreen = ({ route }) => {
   console.log("Product Id :" + item);
   const wishListItems = useSelector((state) => state.wishListReducer);
   console.log("wishListItems  :" + wishListItems);
-
+  const [addedToWishList, setAddedToWishList] = useState(false);
   const addItemToWishList = () => {
     console.log("Added to WishList id: " + item);
+    setAddedToWishList(true);
     dispatch(addToWishList({ item: item }));
+  };
+  const removeItemFromWishList = () => {
+    console.log("Removing from WishList item: " + item);
+    dispatch(removeFromWishList({ item: item }));
+    setAddedToWishList(false);
   };
 
   const addItemToCart = () => {
@@ -51,17 +57,26 @@ const ProductDisplayScreen = ({ route }) => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttons}>
-          <Ionicons
-            name="heart-outline"
-            size={30}
-            onPress={addItemToWishList}
-          />
+          <Foundation name="share" size={30} onPress={addItemToCart} />
         </View>
+        <View style={styles.verticleLine}></View>
+        {!addedToWishList && (
+          <View style={styles.buttons}>
+            <Ionicons
+              name="heart-outline"
+              size={30}
+              onPress={addItemToWishList}
+            />
+          </View>
+        )}
+        {addedToWishList && (
+          <View style={styles.buttons}>
+            <Ionicons name="heart" size={30} onPress={removeItemFromWishList} />
+          </View>
+        )}
+        <View style={styles.verticleLine}></View>
         <View style={styles.buttons}>
           <Ionicons name="cart" size={30} onPress={addItemToCart} />
-        </View>
-        <View style={styles.buttons}>
-          <Foundation name="share" size={30} onPress={addItemToCart} />
         </View>
       </View>
     </>
@@ -88,6 +103,8 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
+    left: 40,
+    borderRadius: 4,
   },
   container: {
     flex: 1,
@@ -98,6 +115,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 300,
+  },
+  verticleLine: {
+    height: "100%",
+    width: 1,
+    backgroundColor: "#909090",
   },
 });
 

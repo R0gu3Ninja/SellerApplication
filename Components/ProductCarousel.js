@@ -14,8 +14,6 @@ const ProductCarousel = (props) => {
         height={500}
         timer={5000}
         onPress={(item) => {
-          console.log("Index is : " + item);
-
           navigator.navigate("ProductDisplayScreen", {
             item: productImages[item],
           });

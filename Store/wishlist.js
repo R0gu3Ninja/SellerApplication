@@ -9,7 +9,9 @@ const wishListSlice = createSlice({
       state.wishListItems.push(action.payload.item);
     },
     removeFromWishList: (state, action) => {
-      console.log("Removing items from wishlist state object");
+      console.log(
+        "Removing items from wishlist state object ::: " + action.payload.item
+      );
       state.wishListItems.splice(
         state.wishListItems.indexOf(action.payload.item),
         1
