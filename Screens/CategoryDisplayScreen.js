@@ -9,32 +9,17 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import HeaderIcons from "../Components/HeaderIcons";
+import BottomSheet from "../Components/BottomSheet";
 import {
   Ionicons,
   Foundation,
   AntDesign,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-const CategoryScreenTabs = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Root"
-        component={CategoryDisplayScreen}
-        options={{ headerShown: false, display: "none" }}
-      />
-      <Tab.Screen
-        name="Sort"
-        component={Filter}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen name="Filter" component={Filter} />
-    </Tab.Navigator>
-  );
-};
 
 const CategoryDisplayScreen = () => {
   const navigation = useNavigation();
+
   return (
     <>
       <View style={styles.container}>
@@ -65,11 +50,18 @@ const CategoryDisplayScreen = () => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttons}>
-          <MaterialCommunityIcons name="sort" size={30} color="black" />
+          <MaterialCommunityIcons
+            name="sort"
+            size={30}
+            color="black"
+            onPress={viewSortOptions}
+          />
         </View>
+        <View style={styles.verticleLine}></View>
         <View style={styles.buttons}>
           <AntDesign name="filter" size={30} color="black" />
         </View>
+        <BottomSheet />
       </View>
     </>
   );
@@ -92,6 +84,12 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
+    left: 40,
+  },
+  verticleLine: {
+    height: "100%",
+    width: 1,
+    backgroundColor: "#909090",
   },
 });
 export default CategoryDisplayScreen;
