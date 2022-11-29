@@ -19,11 +19,7 @@ const ProductDisplayScreen = ({ route }) => {
     dispatch(addToWishList({ item: item }));
     setAddedToWishList(true);
   };
-  const removeItemFromWishList = () => {
-    console.log("Removing from WishList item: " + item);
-    dispatch(removeFromWishList({ item: item }));
-    setAddedToWishList(false);
-  };
+
   const removeItemFromWishList = () => {
     console.log("Removing from WishList item: " + item);
     dispatch(removeFromWishList({ item: item }));

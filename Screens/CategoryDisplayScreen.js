@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import HeaderIcons from "../Components/HeaderIcons";
-import BottomSheet from "../Components/BottomSheet";
 import {
   Ionicons,
   Foundation,
@@ -102,6 +101,7 @@ const styles = StyleSheet.create({
     height: 300,
   },
   buttonsContainer: {
+    left: 40,
     flexDirection: "row",
     borderColor: "#fff",
     justifyContent: "center",
