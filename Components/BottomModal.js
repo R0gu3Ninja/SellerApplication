@@ -5,7 +5,7 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 const BottomModal = () => {
   const sheetRef = useRef(BottomSheet);
   const [isOpen, setIsOpen] = useState(true);
-  const snapPoints = ["40%"];
+  const snapPoints = ["80%"];
   const handleClosePress = () => {
     sheetRef.current.close();
   };
@@ -48,9 +48,10 @@ const BottomModal = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gray",
+    backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "flex-start",
+    opacity: 1,
   },
 });
 export default BottomModal;

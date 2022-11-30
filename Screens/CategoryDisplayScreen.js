@@ -35,34 +35,32 @@ const CategoryDisplayScreen = () => {
 
   return (
     <>
-      {!onclick && (
-        <View style={styles.container}>
-          <FlatList
-            data={productImages.filter((item) => item.category === "t-shirt")}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.container}
-                onPress={() => {
-                  console.log("Insided Categorydisplay :" + item);
-                  navigation.navigate("ProductDisplayScreen", {
-                    item: item,
-                  });
-                }}
-              >
-                <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-                  <Image
-                    style={styles.imageThumbnail}
-                    source={{ uri: item.image }}
-                  />
-                </View>
-              </TouchableOpacity>
-            )}
-            //Setting the number of column
-            numColumns={2}
-            keyExtractor={(item, index) => index}
-          />
-        </View>
-      )}
+      <View style={styles.container}>
+        <FlatList
+          data={productImages.filter((item) => item.category === "t-shirt")}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => {
+                console.log("Insided Categorydisplay :" + item);
+                navigation.navigate("ProductDisplayScreen", {
+                  item: item,
+                });
+              }}
+            >
+              <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
+                <Image
+                  style={styles.imageThumbnail}
+                  source={{ uri: item.image }}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+          //Setting the number of column
+          numColumns={2}
+          keyExtractor={(item, index) => index}
+        />
+      </View>
 
       {!onclick && (
         <View style={styles.buttonsContainer}>

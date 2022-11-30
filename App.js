@@ -22,6 +22,8 @@ import PhoneAuth from "./Login/PhoneAuth";
 import Login from "./Login/Login";
 import Camera from "./Camera/Camera";
 import { useNavigation } from "@react-navigation/native";
+import BottomModal from "./Components/BottomModal";
+import FilterMenu from "./Components/FilterMenu";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,10 +58,10 @@ const HomeScreenDrawer = () => {
         options={{ headerShown: true }}
       />
       <Drawer.Screen name="Logout" component={PhoneAuth} />
-      <Drawer.Screen name="Orders" component={Camera} />
+      <Drawer.Screen name="Orders" component={BottomModal} />
       <Drawer.Screen name="Profile" component={Camera} />
-      <Drawer.Screen name="Support" component={Camera} />
-      <Drawer.Screen name="Contactus" component={Camera} />
+      <Drawer.Screen name="Support" component={FilterMenu} />
+      <Drawer.Screen name="Contactus" component={BottomModal} />
     </Drawer.Navigator>
   );
 };
