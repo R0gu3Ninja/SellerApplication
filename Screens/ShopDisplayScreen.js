@@ -12,16 +12,18 @@ import productImages from "../Images/productImages";
 const ShopDisplayScreen = ({ route }) => {
   const navigation = useNavigation();
   console.log("Displaying shop" + route.params.shopId);
-  const shopId = route.params.shopId;
+  const shopId = "" + route.params.shopId;
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={productImages.filter((item) => (item.shopId = { shopId }))}
+        data={productImages.filter((item) => item.shopId === shopId)}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.container}
-            onPress={() => navigation.navigate("ProductDisplayScreen")}
+            onPress={() =>
+              navigation.navigate("ProductDisplayScreen", { item })
+            }
           >
             <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
               <Image

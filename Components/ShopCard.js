@@ -5,9 +5,9 @@ import { Card, Button, Title, Paragraph } from "react-native-paper";
 const ShopCard = () => {
   return (
     <>
-      <Card style={Styles.container}>
+      <Card style={styles.container}>
         <Card.Content>
-          <Title>Geeks For Geeks</Title>
+          <Title>Shop Name</Title>
         </Card.Content>
         <Card.Cover
           source={{
@@ -15,8 +15,19 @@ const ShopCard = () => {
           }}
         />
         <Card.Content>
-          <Paragraph>A Computer Science portal for Geeks</Paragraph>
+          <Paragraph>
+            Shop Description Shop Description Shop Description Shop Description
+            Shop Description Shop Description
+          </Paragraph>
         </Card.Content>
+        <View style={styles.horizontalLine}></View>
+        <Card.Content>
+          <Paragraph>
+            Review Section Review Section Review Section Review Section Review
+            Section Review Section
+          </Paragraph>
+        </Card.Content>
+        <View style={styles.horizontalLine}></View>
         <Card.Actions>
           <Button>Add To Favourites</Button>
         </Card.Actions>
@@ -25,11 +36,16 @@ const ShopCard = () => {
   );
 };
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     margin: 20,
-    maxHeight: 400,
+    maxHeight: 450,
+  },
+  horizontalLine: {
+    height: 1,
+    width: "100%",
+    backgroundColor: "#909090",
   },
 });
 

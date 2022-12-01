@@ -3,7 +3,7 @@ import {
   StyleSheet,
   FlatList,
   View,
-  Text,
+  Pressable,
   TouchableOpacity,
   Image,
 } from "react-native";
@@ -16,7 +16,13 @@ const ShopCarousel = () => {
   return (
     <View style={styles.container}>
       {images.map((item) => (
-        <ShopCard item={item} />
+        <Pressable
+          onPress={() =>
+            navigation.navigate("ShopDisplayScreen", { shopId: item.shopId })
+          }
+        >
+          <ShopCard item={item} />
+        </Pressable>
       ))}
     </View>
   );

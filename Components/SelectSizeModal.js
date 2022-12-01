@@ -25,7 +25,7 @@ const SelectSizeModal = (props) => {
     console.log("checking for size sizeSelected : " + sizeSelected);
     if (sizeSelected) {
       dispatch(addToCart({ item: props.item }));
-      console.log("removeItemFromWishListHandler");
+      console.log("removeItemFromWishListHandler " + props.item);
       dispatch(removeFromWishList({ item: props.item }));
       sheetRef.current.close();
     } else {

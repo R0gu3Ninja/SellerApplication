@@ -46,7 +46,9 @@ const WishList = () => {
             <View style={styles.container}>
               <TouchableOpacity
                 style={styles.container}
-                onPress={() => navigation.navigate("ProductDisplayScreen", {})}
+                onPress={() =>
+                  navigation.navigate("ProductDisplayScreen", { item })
+                }
               >
                 <View
                   style={{
