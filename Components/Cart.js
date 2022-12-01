@@ -1,44 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, StyleSheet, ScrollView } from "react-native";
 import { Card, Button, Title, Paragraph } from "react-native-paper";
 import { Foundation, MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import CartItemCard from "./CartItemCard";
-import { removeFromCart } from "../Store/cart";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cartItemsReducer.cartItems);
+  const totalAmount = useSelector(
+    (state) => state.cartItemsReducer.totalAmount
+  );
+  const totalDiscount = useSelector(
+    (state) => state.cartItemsReducer.totalDiscount
+  );
+
   return (
     <>
       <ScrollView>
         <View>
           <FlatList
             data={cartItems}
-            renderItem={(item) => <CartItemCard item={item} />}
+            renderItem={(item) => {
+              return <CartItemCard item={item} />;
+            }}
           />
         </View>
         <View>
           <Card>
-            <Card.Content>
+            <Card.Content style={Styles.cardContent}>
               <View style={Styles.priceView}>
                 <Text style={Styles.priceViewDesc}>Bag Total</Text>
-                <Text style={Styles.priceViewPrice}>1000</Text>
-              </View>
-              <View style={Styles.priceView}>
-                <Text style={Styles.priceViewDesc}>Bag Savings</Text>
-                <Text style={Styles.priceViewPrice}>200</Text>
+                <Text style={Styles.priceViewPrice}>{totalAmount}</Text>
               </View>
               <View style={Styles.priceView}>
                 <Text style={Styles.priceViewDesc}>Discount</Text>
-                <Text style={Styles.priceViewPrice}>20</Text>
+                <Text style={Styles.priceViewPrice}>{totalDiscount}</Text>
               </View>
               <View style={Styles.priceView}>
-                <Text style={Styles.priceViewDesc}>Bag Total</Text>
-                <Text style={Styles.priceViewPrice}>1000</Text>
+                <Text style={Styles.priceViewDesc}>Delivery Fee</Text>
+                <Text style={Styles.priceViewPrice}>Free</Text>
               </View>
               <View style={Styles.priceView}>
                 <Text style={Styles.priceViewDesc}>Amount Payable</Text>
-                <Text style={Styles.priceViewPrice}>1000</Text>
+                <Text style={Styles.priceViewPrice}>
+                  {totalAmount - totalDiscount}
+                </Text>
               </View>
             </Card.Content>
           </Card>
@@ -68,6 +74,7 @@ const Styles = StyleSheet.create({
   priceViewPrice: {
     right: 10,
   },
+  cardContent: {},
 });
 
 export default Cart;

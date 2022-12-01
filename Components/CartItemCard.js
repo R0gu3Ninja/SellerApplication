@@ -57,7 +57,7 @@ const CartItemCard = (props) => {
           </View>
           <View style={Styles.priceContainer}>
             <Text>{props.item.item.price}</Text>
-            <Text> APrice </Text>
+            <Text> {props.item.item.price} </Text>
             <Text> Discount </Text>
           </View>
           <Text>Savings</Text>
