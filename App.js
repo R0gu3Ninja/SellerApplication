@@ -39,7 +39,7 @@ const HomeScreenDrawer = () => {
           return (
             <View style={styles.headerIcons}>
               <HeaderIcons
-                iconname="notifications"
+                iconname="cart"
                 onPress={() => navigation.navigate("Cart")}
               />
               <HeaderIcons
@@ -57,11 +57,12 @@ const HomeScreenDrawer = () => {
         component={HomeScreenTabs}
         options={{ headerShown: true }}
       />
-      <Drawer.Screen name="Logout" component={PhoneAuth} />
-      <Drawer.Screen name="Orders" component={BottomModal} />
+
       <Drawer.Screen name="Profile" component={Camera} />
+      <Drawer.Screen name="Orders" component={BottomModal} />
       <Drawer.Screen name="Support" component={FilterMenu} />
       <Drawer.Screen name="Contactus" component={BottomModal} />
+      <Drawer.Screen name="Logout" component={PhoneAuth} />
     </Drawer.Navigator>
   );
 };
@@ -133,7 +134,7 @@ export default function App() {
               headerRight: () => {
                 return (
                   <View style={styles.headerIcons}>
-                    <HeaderIcons iconname="notifications" />
+                    <HeaderIcons iconname="cart" onPress={() => <Cart />} />
                     <HeaderIcons iconname="heart-outline" />
                     <HeaderIcons iconname="search" />
                   </View>

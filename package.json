@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/config-plugins": "^5.0.4",
     "@expo/webpack-config": "^0.17.2",
     "@firebase/auth": "^0.20.11",
     "@gorhom/bottom-sheet": "^4.4.5",

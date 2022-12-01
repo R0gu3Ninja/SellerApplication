@@ -5,6 +5,7 @@ import productImages from "../Images/productImages";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
+import { addToCart, removeFromCart } from "../Store/cart";
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
@@ -27,7 +28,14 @@ const ProductDisplayScreen = ({ route }) => {
   };
 
   const addItemToCart = () => {
-    console.log("Added to Cart");
+    console.log("Added to cart id: " + item);
+    dispatch(addToCart({ item: item }));
+  };
+
+  const removeItemFromCart = () => {
+    console.log("Removing from Cart item: " + item);
+    dispatch(removeFromCart({ item: item }));
+    setAddedToWishList(false);
   };
   return (
     <>

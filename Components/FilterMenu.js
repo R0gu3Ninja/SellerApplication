@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, Button } from "react-native";
 // All your menu options go here.
 
 const FilterMenu = () => {
@@ -15,44 +15,54 @@ const FilterMenu = () => {
   // this holds the keys of the menuItems for the view to know which category is currently being rendered.
   const [selectedItem, setSelectedItem] = useState("1");
   return (
-    <View style={styles.content}>
-      <View style={styles.menuColumn}>
-        {menuItems.map((item, index) => {
-          return (
-            <TouchableOpacity
-              key={item.id}
-              onPress={() => setSelectedItem(item.id)}
-              style={[
-                styles.menuItem,
-                item.id === selectedItem ? styles.selectedMenuItem : null,
-              ]}
-            >
-              <Text style={styles.menuItemText}>{item.name}</Text>
-            </TouchableOpacity>
-          );
-        })}
+    <>
+      <View style={styles.content}>
+        <View style={styles.menuColumn}>
+          {menuItems.map((item, index) => {
+            return (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => setSelectedItem(item.id)}
+                style={[
+                  styles.menuItem,
+                  item.id === selectedItem ? styles.selectedMenuItem : null,
+                ]}
+              >
+                <Text style={styles.menuItemText}>{item.name}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        <View style={styles.settingsColumn}>
+          {/* Option 1: AGE */}
+          {selectedItem === "1" && (
+            <View style={styles.settingsView}>
+              <Text>S</Text>
+              <Text>M</Text>
+              <Text>L</Text>
+              <Text>XL</Text>
+              <Text>XXL</Text>
+            </View>
+          )}
+          {selectedItem === "2" && (
+            <View style={styles.settingsView}>
+              <Text>Red</Text>
+              <Text>Blue</Text>
+              <Text>Black</Text>
+              <Text>Yellow</Text>
+            </View>
+          )}
+        </View>
       </View>
-      <View style={styles.settingsColumn}>
-        {/* Option 1: AGE */}
-        {selectedItem === "1" && (
-          <View style={styles.settingsView}>
-            <Text>S</Text>
-            <Text>M</Text>
-            <Text>L</Text>
-            <Text>XL</Text>
-            <Text>XXL</Text>
-          </View>
-        )}
-        {selectedItem === "2" && (
-          <View style={styles.settingsView}>
-            <Text>Red</Text>
-            <Text>Blue</Text>
-            <Text>Black</Text>
-            <Text>Yellow</Text>
-          </View>
-        )}
+      <View style={styles.buttonsView}>
+        <View style={styles.buttons}>
+          <Button title="cancel"></Button>
+        </View>
+        <View style={styles.buttons}>
+          <Button title="apply" style={styles.buttons}></Button>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -98,6 +108,14 @@ const styles = StyleSheet.create({
   settingsColumn: {
     flex: 0.6,
     padding: 15,
+  },
+  buttonsView: {
+    flexDirection: "row",
+    borderColor: "#fff",
+    justifyContent: "center",
+  },
+  buttons: {
+    flex: 1,
   },
 });
 export default FilterMenu;

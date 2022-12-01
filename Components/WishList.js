@@ -11,7 +11,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import HeaderIcons from "./HeaderIcons";
 import { Ionicons } from "@expo/vector-icons";
-import { removeItemFromWishList } from "../Store/wishlist";
+import { removeFromWishList } from "../Store/wishlist";
+import { addToCart } from "../Store/cart";
 
 const WishList = () => {
   const navigation = useNavigation();
@@ -19,9 +20,13 @@ const WishList = () => {
   const wishListItems = useSelector(
     (state) => state.wishListReducer.wishListItems
   );
-  const removeItemFromWishListHandler = () => {
+  const removeItemFromWishListHandler = (item) => {
     console.log("removeItemFromWishListHandler");
-    dispatch(removeItemFromWishList({ item: item }));
+    dispatch(removeFromWishList({ item: item }));
+  };
+  const addToCartHandler = (item) => {
+    console.log("addToCartHandler " + item);
+    dispatch(addToCart({ item: item }));
   };
   return (
     <>
@@ -48,10 +53,13 @@ const WishList = () => {
                 </View>
               </TouchableOpacity>
               <View>
-                <Button title="move to Cart"></Button>
+                <Button
+                  title="Move to Cart"
+                  onPress={() => addToCartHandler(item)}
+                ></Button>
                 <Button
                   title="Remove"
-                  onPress={removeItemFromWishListHandler}
+                  onPress={() => removeItemFromWishListHandler(item)}
                 ></Button>
               </View>
             </View>

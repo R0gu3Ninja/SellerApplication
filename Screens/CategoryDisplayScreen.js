@@ -6,16 +6,9 @@ import {
   View,
   Image,
   FlatList,
-  Text,
 } from "react-native";
 import productImages from "../Images/productImages";
-import HeaderIcons from "../Components/HeaderIcons";
-import {
-  Ionicons,
-  Foundation,
-  AntDesign,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import FilterMenu from "../Components/FilterMenu";
 import BottomModal from "../Components/BottomModal";
 
@@ -28,8 +21,8 @@ const CategoryDisplayScreen = () => {
     setOnClick(true);
   };
   const showFilterOptions = () => {
-    setScreen(<FilterMenu />);
     setOnClick(true);
+    setScreen(<FilterMenu />);
   };
   const navigation = useNavigation();
 
