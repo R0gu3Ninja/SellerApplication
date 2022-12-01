@@ -9,8 +9,6 @@ import {
   FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import HeaderIcons from "./HeaderIcons";
-import { Ionicons } from "@expo/vector-icons";
 import { removeFromWishList } from "../Store/wishlist";
 import { addToCart } from "../Store/cart";
 

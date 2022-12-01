@@ -6,6 +6,8 @@ import { Ionicons, Foundation } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { addToCart, removeFromCart } from "../Store/cart";
+import SelectSizeModal from "../Components/SelectSizeModal";
+
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
@@ -14,11 +16,12 @@ const ProductDisplayScreen = ({ route }) => {
   const wishListItems = useSelector((state) => state.wishListReducer);
   console.log("wishListItems  :" + wishListItems);
   const [addedToWishList, setAddedToWishList] = useState(false);
+  const [sizeSelected, setSizeSelected] = useState(false);
+  const [displaySizeModalScreen, setDisplaySizeModalScreen] = useState(false);
   const addItemToWishList = () => {
     console.log("Added to WishList id: " + item);
     setAddedToWishList(true);
     dispatch(addToWishList({ item: item }));
-    setAddedToWishList(true);
   };
 
   const removeItemFromWishList = () => {
@@ -27,9 +30,11 @@ const ProductDisplayScreen = ({ route }) => {
     setAddedToWishList(false);
   };
 
-  const addItemToCart = () => {
-    console.log("Added to cart id: " + item);
-    dispatch(addToCart({ item: item }));
+  const displaySizeModalScreenHandler = () => {
+    console.log("Added to cart ifrom productdisplay: " + item);
+
+    setDisplaySizeModalScreen(true);
+    //setSizeSelected(true);
   };
 
   const removeItemFromCart = () => {
@@ -67,7 +72,11 @@ const ProductDisplayScreen = ({ route }) => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttons}>
-          <Foundation name="share" size={30} onPress={addItemToCart} />
+          <Foundation
+            name="share"
+            size={30}
+            onPress={displaySizeModalScreenHandler}
+          />
         </View>
         <View style={styles.verticleLine}></View>
         {!addedToWishList && (
@@ -86,9 +95,14 @@ const ProductDisplayScreen = ({ route }) => {
         )}
         <View style={styles.verticleLine}></View>
         <View style={styles.buttons}>
-          <Ionicons name="cart" size={30} onPress={addItemToCart} />
+          <Ionicons
+            name="cart"
+            size={30}
+            onPress={displaySizeModalScreenHandler}
+          />
         </View>
       </View>
+      {displaySizeModalScreen && <SelectSizeModal item={item} />}
     </>
   );
 };
