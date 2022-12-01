@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -11,10 +11,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromWishList } from "../Store/wishlist";
 import { addToCart } from "../Store/cart";
+import SelectSizeModal from "./SelectSizeModal";
 
 const WishList = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [displaySizeModalScreen, setDisplaySizeModalScreen] = useState(false);
+  const [currentItem, setCurrentItem] = useState();
   const wishListItems = useSelector(
     (state) => state.wishListReducer.wishListItems
   );
@@ -25,6 +28,14 @@ const WishList = () => {
   const addToCartHandler = (item) => {
     console.log("addToCartHandler " + item);
     dispatch(addToCart({ item: item }));
+  };
+  const displaySizeModalScreenHandler = (item) => {
+    console.log("Added to cart ifrom productdisplay: ");
+    setCurrentItem(item);
+    setDisplaySizeModalScreen(true);
+    console.log("coming out after adding to cart ");
+    //removeItemFromWishListHandler(item);
+    //setSizeSelected(true);
   };
   return (
     <>
@@ -53,7 +64,7 @@ const WishList = () => {
               <View>
                 <Button
                   title="Move to Cart"
-                  onPress={() => addToCartHandler(item)}
+                  onPress={() => displaySizeModalScreenHandler(item)}
                 ></Button>
                 <Button
                   title="Remove"
@@ -67,6 +78,7 @@ const WishList = () => {
           keyExtractor={(item, index) => index}
         />
       </View>
+      {displaySizeModalScreen && <SelectSizeModal item={currentItem} />}
     </>
   );
 };

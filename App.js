@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import "expo-dev-client";
+import { useState } from "react";
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -122,58 +123,68 @@ const HomeScreenTabs = () => {
   );
 };
 
+const MainNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={({ navigation }) => ({
+          title: "",
+          headerTitleAlign: "center",
+          headerRight: () => {
+            return (
+              <View style={styles.headerIcons}>
+                <HeaderIcons
+                  iconname="cart"
+                  onPress={() => navigation.navigate("Cart")}
+                />
+                <HeaderIcons
+                  iconname="heart-outline"
+                  onPress={() => navigation.navigate("WishList")}
+                />
+                <HeaderIcons iconname="search" />
+              </View>
+            );
+          },
+          headerLeft: () => {
+            return (
+              <View style={styles.logo}>
+                <Image style={styles.image} source={logo} />
+                <Text style={styles.logoText}>Local</Text>
+              </View>
+            );
+          },
+        })}
+      >
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreenDrawer}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ProductDisplayScreen"
+          component={ProductDisplayScreen}
+        />
+        <Stack.Screen
+          name="CategoryDisplayScreen"
+          component={CategoryDisplayScreen}
+        />
+        <Stack.Screen name="ShopDisplayScreen" component={ShopDisplayScreen} />
+        <Stack.Screen name="WishList" component={WishList} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Camera" component={Camera} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 export default function App() {
   return (
     <>
       <Provider store={globalStore}>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              title: "",
-              headerTitleAlign: "center",
-              headerRight: () => {
-                return (
-                  <View style={styles.headerIcons}>
-                    <HeaderIcons iconname="cart" onPress={() => <Cart />} />
-                    <HeaderIcons iconname="heart-outline" />
-                    <HeaderIcons iconname="search" />
-                  </View>
-                );
-              },
-              headerLeft: () => {
-                return (
-                  <View style={styles.logo}>
-                    <Image style={styles.image} source={logo} />
-                    <Text style={styles.logoText}>Local</Text>
-                  </View>
-                );
-              },
-            }}
-          >
-            <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreenDrawer}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ProductDisplayScreen"
-              component={ProductDisplayScreen}
-            />
-            <Stack.Screen
-              name="CategoryDisplayScreen"
-              component={CategoryDisplayScreen}
-            />
-            <Stack.Screen
-              name="ShopDisplayScreen"
-              component={ShopDisplayScreen}
-            />
-            <Stack.Screen name="WishList" component={WishList} />
-            <Stack.Screen name="Cart" component={Cart} />
-            <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Camera" component={Camera} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <MainNavigator />
       </Provider>
     </>
   );

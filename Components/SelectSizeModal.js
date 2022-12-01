@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { addToCart } from "../Store/cart";
+import { removeFromWishList } from "../Store/wishlist";
 import { useDispatch } from "react-redux";
 const SelectSizeModal = (props) => {
   const sheetRef = useRef(BottomSheet);
@@ -24,6 +25,8 @@ const SelectSizeModal = (props) => {
     console.log("checking for size sizeSelected : " + sizeSelected);
     if (sizeSelected) {
       dispatch(addToCart({ item: props.item }));
+      console.log("removeItemFromWishListHandler");
+      dispatch(removeFromWishList({ item: props.item }));
       sheetRef.current.close();
     } else {
       Alert.alert("select size");

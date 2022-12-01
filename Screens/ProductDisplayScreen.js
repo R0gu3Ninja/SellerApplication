@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
+import { useNavigation } from "@react-navigation/native";
 import productImages from "../Images/productImages";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   console.log("Product Id :" + item);
   const wishListItems = useSelector((state) => state.wishListReducer);
   console.log("wishListItems  :" + wishListItems);
