@@ -18,13 +18,13 @@ import AccountScreen from "./Components/AccountScreen";
 import { Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import globalStore from "./Store/index";
-import LogoutScreen from "./Login/LogoutScreen";
 import PhoneAuth from "./Login/PhoneAuth";
 import Login from "./Login/Login";
 import Camera from "./Camera/Camera";
 import { useNavigation } from "@react-navigation/native";
-import BottomModal from "./Components/BottomModal";
+import SortModal from "./Components/SortModal";
 import FilterMenu from "./Components/FilterMenu";
+import SizeModal from "./Components/SizeModal";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,10 +60,10 @@ const HomeScreenDrawer = () => {
       />
 
       <Drawer.Screen name="Profile" component={Camera} />
-      <Drawer.Screen name="Orders" component={BottomModal} />
+      <Drawer.Screen name="Orders" component={SortModal} />
       <Drawer.Screen name="Support" component={FilterMenu} />
-      <Drawer.Screen name="Contactus" component={BottomModal} />
-      <Drawer.Screen name="Logout" component={PhoneAuth} />
+      <Drawer.Screen name="Contactus" component={SortModal} />
+      <Drawer.Screen name="Logout" component={SizeModal} />
     </Drawer.Navigator>
   );
 };

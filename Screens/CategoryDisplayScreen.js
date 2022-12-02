@@ -11,24 +11,22 @@ import productImages from "../Images/productImages";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import FilterMenu from "../Components/FilterMenu";
 import BottomModal from "../Components/BottomModal";
-
+import SortModal from "../Components/SortModal";
 const CategoryDisplayScreen = () => {
-  const [onclick, setOnClick] = useState(false);
   const [screen, setScreen] = useState();
+  const navigation = useNavigation();
 
   const showSortOptions = () => {
-    setScreen(<BottomModal />);
-    setOnClick(true);
+    console.log("showSortOptions");
+    setScreen(<SortModal />);
   };
   const showFilterOptions = () => {
-    setOnClick(true);
     setScreen(<FilterMenu />);
   };
-  const navigation = useNavigation();
 
   return (
     <>
-      <View style={styles.container}>
+      <View>
         <FlatList
           data={productImages.filter((item) => item.category === "t-shirt")}
           renderItem={({ item }) => (
@@ -54,8 +52,8 @@ const CategoryDisplayScreen = () => {
           keyExtractor={(item, index) => index}
         />
       </View>
-
-      {!onclick && (
+      <View style={styles.modalContainer}>{screen}</View>
+      <View>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttons}>
             <MaterialCommunityIcons
@@ -75,8 +73,7 @@ const CategoryDisplayScreen = () => {
             />
           </View>
         </View>
-      )}
-      {onclick && screen}
+      </View>
     </>
   );
 };
@@ -96,6 +93,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: "#fff",
     justifyContent: "center",
+  },
+  modalContainer: {
+    maxHeight: 0,
   },
   buttons: {
     flex: 1,

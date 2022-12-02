@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import { useNavigation } from "@react-navigation/native";
 import productImages from "../Images/productImages";
-import { Ionicons, Foundation } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { addToCart, removeFromCart } from "../Store/cart";
-import SelectSizeModal from "../Components/SelectSizeModal";
+import SizeModal from "../Components/SizeModal";
 
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
@@ -18,8 +18,10 @@ const ProductDisplayScreen = ({ route }) => {
   const wishListItems = useSelector((state) => state.wishListReducer);
   console.log("wishListItems  :" + wishListItems);
   const [addedToWishList, setAddedToWishList] = useState(false);
-  const [sizeSelected, setSizeSelected] = useState(false);
-  const [displaySizeModalScreen, setDisplaySizeModalScreen] = useState(false);
+  const [addedToCart, setAddToCart] = useState(false);
+  addedToCart;
+  const [screen, setScreen] = useState();
+
   const addItemToWishList = () => {
     console.log("Added to WishList id: " + item);
     setAddedToWishList(true);
@@ -33,10 +35,14 @@ const ProductDisplayScreen = ({ route }) => {
   };
 
   const displaySizeModalScreenHandler = () => {
-    console.log("Added to cart ifrom productdisplay: " + item);
+    console.log("displaySizeModalScreenHandler : " + item);
+    setScreen(<SizeModal item={item} test={setAddToCartHandler} />);
 
-    setDisplaySizeModalScreen(true);
     //setSizeSelected(true);
+  };
+
+  const setAddToCartHandler = (value) => {
+    setAddToCart(value);
   };
 
   const removeItemFromCart = () => {
@@ -44,6 +50,7 @@ const ProductDisplayScreen = ({ route }) => {
     dispatch(removeFromCart({ item: item }));
     setAddedToWishList(false);
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -73,14 +80,6 @@ const ProductDisplayScreen = ({ route }) => {
         </ScrollView>
       </View>
       <View style={styles.buttonsContainer}>
-        <View style={styles.buttons}>
-          <Foundation
-            name="share"
-            size={30}
-            onPress={displaySizeModalScreenHandler}
-          />
-        </View>
-        <View style={styles.verticleLine}></View>
         {!addedToWishList && (
           <View style={styles.buttons}>
             <Ionicons
@@ -97,14 +96,27 @@ const ProductDisplayScreen = ({ route }) => {
         )}
         <View style={styles.verticleLine}></View>
         <View style={styles.buttons}>
-          <Ionicons
-            name="cart"
-            size={30}
-            onPress={displaySizeModalScreenHandler}
-          />
+          {!addedToCart && (
+            <MaterialCommunityIcons
+              name="cart-plus"
+              size={30}
+              color="black"
+              onPress={displaySizeModalScreenHandler}
+            />
+          )}
+          {addedToCart && (
+            <MaterialCommunityIcons
+              name="cart-arrow-right"
+              size={30}
+              color="black"
+              onPress={() => {
+                navigation.navigate("Cart");
+              }}
+            />
+          )}
         </View>
       </View>
-      {displaySizeModalScreen && <SelectSizeModal item={item} />}
+      <View style={styles.sizeModal}>{screen}</View>
     </>
   );
 };
@@ -145,6 +157,9 @@ const styles = StyleSheet.create({
     height: "100%",
     width: 1,
     backgroundColor: "#909090",
+  },
+  sizeModal: {
+    height: "0%",
   },
 });
 
