@@ -28,8 +28,9 @@ import Camera from "./Camera/Camera";
 import { useNavigation } from "@react-navigation/native";
 import SortModal from "./Components/SortModal";
 import FilterMenu from "./Components/FilterMenu";
-import SizeModal from "./Components/SizeModal";
+import CommmentsSection from "./Components/CommmentsSection";
 import StarRating from "./Components/StarRating";
+import CommentCard from "./Components/CommentCard";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -67,7 +68,7 @@ const HomeScreenDrawer = () => {
       <Drawer.Screen name="Orders" component={SortModal} />
       <Drawer.Screen name="Support" component={FilterMenu} />
       <Drawer.Screen name="Contactus" component={StarRating} />
-      <Drawer.Screen name="Logout" component={StarRating} />
+      <Drawer.Screen name="Logout" component={CommentCard} />
     </Drawer.Navigator>
   );
 };
