@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import { useNavigation } from "@react-navigation/native";
 import productImages from "../Images/productImages";
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { addToCart, removeFromCart } from "../Store/cart";
 import SizeModal from "../Components/SizeModal";
-import StarRating from "../Components/StarRating";
+
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import CommentsSection from "../Components/CommentsSection";
 import RatingsSection from "../Components/RatingsSection";
@@ -40,7 +40,6 @@ const ProductDisplayScreen = ({ route }) => {
   const displaySizeModalScreenHandler = () => {
     console.log("displaySizeModalScreenHandler : " + item);
     setScreen(<SizeModal item={item} test={setAddToCartHandler} />);
-
     //setSizeSelected(true);
   };
 
@@ -52,6 +51,10 @@ const ProductDisplayScreen = ({ route }) => {
     console.log("Removing from Cart item: " + item);
     dispatch(removeFromCart({ item: item }));
     setAddedToWishList(false);
+  };
+
+  const viewSimilarItems = () => {
+    console.log("View similar");
   };
 
   return (
@@ -70,22 +73,18 @@ const ProductDisplayScreen = ({ route }) => {
             indicatorActiveWidth={30}
             animation
           />
-          <View style={styles.ratingSection}>
-            <StarRating />
-            <View style={styles.verticalLine}></View>
+        </View>
+        <Pressable onPress={viewSimilarItems}>
+          <View style={styles.viewSimilarButton}>
             <MaterialCommunityIcons
               style={styles.viewSimilarContainer}
               name="view-carousel-outline"
               size={30}
               color="black"
               onPress={console.log("similar")}
-            >
-              <Text style={styles.viewSimilarContainer}>
-                View Similar Items
-              </Text>
-            </MaterialCommunityIcons>
+            />
           </View>
-        </View>
+        </Pressable>
         <ProductDescriptionCard style={{ margin: 20 }} />
         <RatingsSection />
         <CommentsSection />
@@ -118,7 +117,6 @@ const ProductDisplayScreen = ({ route }) => {
           {addedToCart && (
             <MaterialCommunityIcons
               name="cart-arrow-right"
-              size={30}
               color="black"
               onPress={() => {
                 navigation.navigate("Cart");
@@ -172,15 +170,18 @@ const styles = StyleSheet.create({
   sizeModal: {
     height: "0%",
   },
-  ratingSection: {
-    flexDirection: "row",
+  similarItems: {
+    top: 40,
   },
   viewSimilarButton: {
-    right: 0,
+    marginTop: -40,
+    zIndex: 1,
+    maxWidth: 50,
   },
   viewSimilarContainer: {
-    fontSize: 20,
-    backgroundColor: "gray",
+    left: "30%",
+    fontSize: 40,
+    backgroundColor: "transparent",
   },
 });
 
