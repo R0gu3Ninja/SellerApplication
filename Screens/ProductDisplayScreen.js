@@ -10,6 +10,8 @@ import { addToCart, removeFromCart } from "../Store/cart";
 import SizeModal from "../Components/SizeModal";
 import StarRating from "../Components/StarRating";
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
+import CommentsSection from "../Components/CommentsSection";
+import RatingsSection from "../Components/RatingsSection";
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
@@ -54,7 +56,7 @@ const ProductDisplayScreen = ({ route }) => {
 
   return (
     <>
-      <View style={styles.container}>
+      <ScrollView>
         <View style={styles.productCarousel}>
           <FlatListSlider
             data={productImages}
@@ -83,9 +85,11 @@ const ProductDisplayScreen = ({ route }) => {
               </Text>
             </MaterialCommunityIcons>
           </View>
-          <ProductDescriptionCard style={{ margin: 20 }} />
         </View>
-      </View>
+        <ProductDescriptionCard style={{ margin: 20 }} />
+        <RatingsSection />
+        <CommentsSection />
+      </ScrollView>
       <View style={styles.buttonsContainer}>
         {!addedToWishList && (
           <View style={styles.buttons}>
