@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     margin: 20,
     maxHeight: 450,
+    width: "100%",
   },
   horizontalLine: {
     height: 1,

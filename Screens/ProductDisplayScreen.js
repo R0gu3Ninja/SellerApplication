@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { addToCart, removeFromCart } from "../Store/cart";
 import SizeModal from "../Components/SizeModal";
-
+import StarRating from "../Components/StarRating";
+import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
@@ -67,17 +68,23 @@ const ProductDisplayScreen = ({ route }) => {
             indicatorActiveWidth={30}
             animation
           />
+          <View style={styles.ratingSection}>
+            <StarRating />
+            <View style={styles.verticalLine}></View>
+            <MaterialCommunityIcons
+              style={styles.viewSimilarContainer}
+              name="view-carousel-outline"
+              size={30}
+              color="black"
+              onPress={console.log("similar")}
+            >
+              <Text style={styles.viewSimilarContainer}>
+                View Similar Items
+              </Text>
+            </MaterialCommunityIcons>
+          </View>
+          <ProductDescriptionCard style={{ margin: 20 }} />
         </View>
-        <ScrollView style={styles.scrollView}>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-          <Text>Product Description</Text>
-        </ScrollView>
       </View>
       <View style={styles.buttonsContainer}>
         {!addedToWishList && (
@@ -94,7 +101,7 @@ const ProductDisplayScreen = ({ route }) => {
             <Ionicons name="heart" size={30} onPress={removeItemFromWishList} />
           </View>
         )}
-        <View style={styles.verticleLine}></View>
+
         <View style={styles.buttons}>
           {!addedToCart && (
             <MaterialCommunityIcons
@@ -153,13 +160,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 300,
   },
-  verticleLine: {
+  verticalLine: {
     height: "100%",
     width: 1,
-    backgroundColor: "#909090",
+    backgroundColor: "black",
   },
   sizeModal: {
     height: "0%",
+  },
+  ratingSection: {
+    flexDirection: "row",
+  },
+  viewSimilarButton: {
+    right: 0,
+  },
+  viewSimilarContainer: {
+    fontSize: 20,
+    backgroundColor: "gray",
   },
 });
 

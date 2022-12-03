@@ -6,12 +6,14 @@ import {
   View,
   Image,
   FlatList,
+  Text,
 } from "react-native";
 import productImages from "../Images/productImages";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import FilterMenu from "../Components/FilterMenu";
-import BottomModal from "../Components/BottomModal";
 import SortModal from "../Components/SortModal";
+import ProductDescriptionCard from "../Components/ProductDescriptionCard";
+import StarRating from "../Components/StarRating";
 const CategoryDisplayScreen = () => {
   const [screen, setScreen] = useState();
   const navigation = useNavigation();
@@ -26,10 +28,10 @@ const CategoryDisplayScreen = () => {
 
   return (
     <>
-      <View>
-        <FlatList
-          data={productImages.filter((item) => item.category === "t-shirt")}
-          renderItem={({ item }) => (
+      <FlatList
+        data={productImages.filter((item) => item.category === "t-shirt")}
+        renderItem={({ item }) => (
+          <>
             <TouchableOpacity
               style={styles.container}
               onPress={() => {
@@ -44,14 +46,19 @@ const CategoryDisplayScreen = () => {
                   style={styles.imageThumbnail}
                   source={{ uri: item.image }}
                 />
+                <View style={styles.ratingSection}>
+                  <StarRating />
+                </View>
+                <ProductDescriptionCard />
               </View>
             </TouchableOpacity>
-          )}
-          //Setting the number of column
-          numColumns={2}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
+          </>
+        )}
+        //Setting the number of column
+        numColumns={2}
+        keyExtractor={(item, index) => index}
+      />
+
       <View style={styles.modalContainer}>{screen}</View>
       <View>
         <View style={styles.buttonsContainer}>
@@ -82,6 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "white",
+    height: 530,
   },
   imageThumbnail: {
     justifyContent: "center",
@@ -99,6 +107,16 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
+  },
+  ratingSection: {
+    flexDirection: "row",
+  },
+  viewSimilarButton: {
+    right: 0,
+  },
+  viewSimilarContainer: {
+    fontSize: 20,
+    backgroundColor: "gray",
   },
 });
 export default CategoryDisplayScreen;

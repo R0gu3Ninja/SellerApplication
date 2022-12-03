@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Card, Button } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { removeFromCart } from "../Store/cart";
 import { useDispatch } from "react-redux";
@@ -68,10 +68,10 @@ const CartItemCard = (props) => {
           style={Styles.actionButtons}
           onPress={moveItemToWishlistHandler}
         >
-          Move To Wishlist
+          <MaterialCommunityIcons name="cart-heart" size={24} color="black" />
         </Button>
         <Button style={Styles.actionButtons} onPress={removeFromCartHandler}>
-          remove from cart
+          <MaterialIcons name="delete" size={24} color="black" />
         </Button>
       </Card.Actions>
     </Card>

@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import "expo-dev-client";
-import { useState } from "react";
+
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -15,7 +15,11 @@ import Cart from "./Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import AccountScreen from "./Components/AccountScreen";
-import { Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Foundation,
+  MaterialCommunityIcons,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import globalStore from "./Store/index";
 import PhoneAuth from "./Login/PhoneAuth";
@@ -25,7 +29,7 @@ import { useNavigation } from "@react-navigation/native";
 import SortModal from "./Components/SortModal";
 import FilterMenu from "./Components/FilterMenu";
 import SizeModal from "./Components/SizeModal";
-
+import StarRating from "./Components/StarRating";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -62,8 +66,8 @@ const HomeScreenDrawer = () => {
       <Drawer.Screen name="Profile" component={Camera} />
       <Drawer.Screen name="Orders" component={SortModal} />
       <Drawer.Screen name="Support" component={FilterMenu} />
-      <Drawer.Screen name="Contactus" component={SortModal} />
-      <Drawer.Screen name="Logout" component={SizeModal} />
+      <Drawer.Screen name="Contactus" component={StarRating} />
+      <Drawer.Screen name="Logout" component={StarRating} />
     </Drawer.Navigator>
   );
 };
@@ -81,16 +85,12 @@ const HomeScreenTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Accounts"
+        name="Orders"
         component={AccountScreen}
         options={() => ({
           tabBarIcon: () => {
             return (
-              <MaterialCommunityIcons
-                name="account-details"
-                size={24}
-                color="black"
-              />
+              <SimpleLineIcons name="social-dropbox" size={24} color="black" />
             );
           },
         })}

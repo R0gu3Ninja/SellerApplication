@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Button,
+} from "react-native";
 
 const ModalOptions = ({ sortOption, onPress }) => {
-  return (
-    <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{sortOption}</Text>
-    </Pressable>
-  );
+  return <Button title={sortOption} onPress={onPress}></Button>;
 };
 const SortModal = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const [filterCriteria, setFilterCriteria] = useState("NEWEST_ARRIVALS");
-
-  useEffect(() => {
-    setModalVisible(!modalVisible);
-  }, []);
 
   useEffect(() => {
     console.log("filter criteria changed : " + filterCriteria);
@@ -36,7 +36,7 @@ const SortModal = () => {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View>
             <ModalOptions
               sortOption="Newest Arrivals"
               onPress={() => setFilterCriteriaHandler("NEWEST_ARRIVALS")}

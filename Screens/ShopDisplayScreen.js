@@ -8,7 +8,8 @@ import {
   FlatList,
 } from "react-native";
 import productImages from "../Images/productImages";
-
+import ProductDescriptionCard from "../Components/ProductDescriptionCard";
+import StarRating from "../Components/StarRating";
 const ShopDisplayScreen = ({ route }) => {
   const navigation = useNavigation();
   console.log("Displaying shop" + route.params.shopId);
@@ -17,21 +18,30 @@ const ShopDisplayScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={productImages.filter((item) => item.shopId === shopId)}
+        data={productImages.filter((item) => item.category === "t-shirt")}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.container}
-            onPress={() =>
-              navigation.navigate("ProductDisplayScreen", { item })
-            }
-          >
-            <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-              <Image
-                style={styles.imageThumbnail}
-                source={{ uri: item.image }}
-              />
-            </View>
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => {
+                console.log("Insided Categorydisplay :" + item);
+                navigation.navigate("ProductDisplayScreen", {
+                  item: item,
+                });
+              }}
+            >
+              <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
+                <Image
+                  style={styles.imageThumbnail}
+                  source={{ uri: item.image }}
+                />
+                <View style={styles.ratingSection}>
+                  <StarRating />
+                </View>
+                <ProductDescriptionCard />
+              </View>
+            </TouchableOpacity>
+          </>
         )}
         //Setting the number of column
         numColumns={2}

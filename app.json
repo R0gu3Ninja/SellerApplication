@@ -5,10 +5,10 @@
     "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/local.jpg",
+    "icon": "./assets/local.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/local.jpg",
+      "image": "./assets/local.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,13 +22,13 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/local.jpg",
+        "foregroundImage": "./assets/local.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.jayendrabhaskar.Homescreen"
     },
     "web": {
-      "favicon": "./assets/local.jpg"
+      "favicon": "./assets/local.png"
     },
     "extra": {
       "eas": {
