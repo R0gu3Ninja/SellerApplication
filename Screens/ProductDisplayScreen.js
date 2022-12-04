@@ -56,10 +56,6 @@ const ProductDisplayScreen = ({ route }) => {
     setAddedToWishList(false);
   };
 
-  const viewSimilarItems = () => {
-    console.log("View similar");
-    setSimilarItemsModal(true);
-  };
   const childRef = useRef();
   return (
     <>
@@ -78,17 +74,17 @@ const ProductDisplayScreen = ({ route }) => {
             animation
           />
         </View>
-        <Pressable onPress={viewSimilarItems}>
-          <View style={styles.viewSimilarButton}>
-            <MaterialCommunityIcons
-              style={styles.viewSimilarContainer}
-              name="view-carousel-outline"
-              size={30}
-              color="black"
-              onPress={() => childRef.current.showModal()}
-            />
-          </View>
-        </Pressable>
+
+        <View style={styles.viewSimilarButton}>
+          <MaterialCommunityIcons
+            style={styles.viewSimilarContainer}
+            name="view-carousel-outline"
+            size={30}
+            color="black"
+            onPress={() => childRef.current.showModal()}
+          />
+        </View>
+
         <ProductDescriptionCard style={{ margin: 20 }} />
         <RatingsSection />
         <CommentsSection />
@@ -188,10 +184,13 @@ const styles = StyleSheet.create({
   viewSimilarButton: {
     marginTop: -40,
     zIndex: 1,
-    maxWidth: 50,
+    maxWidth: 60,
+    backgroundColor: "white",
+    borderRadius: 20,
+    left: 10,
   },
   viewSimilarContainer: {
-    left: "30%",
+    left: "20%",
     fontSize: 40,
     backgroundColor: "transparent",
   },
