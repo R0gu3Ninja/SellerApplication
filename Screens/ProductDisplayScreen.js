@@ -7,7 +7,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
 import { addToCart, removeFromCart } from "../Store/cart";
-import SizeModal from "../Components/SizeModal";
+import SizeModalNew from "../Components/SizeModalNew";
 
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import CommentsSection from "../Components/CommentsSection";
@@ -42,7 +42,7 @@ const ProductDisplayScreen = ({ route }) => {
 
   const displaySizeModalScreenHandler = () => {
     console.log("displaySizeModalScreenHandler : " + item);
-    setScreen(<SizeModal item={item} test={setAddToCartHandler} />);
+    setScreen(<SizeModalNew item={item} test={setAddToCartHandler} />);
     //setSizeSelected(true);
   };
 
@@ -56,7 +56,9 @@ const ProductDisplayScreen = ({ route }) => {
     setAddedToWishList(false);
   };
 
-  const childRef = useRef();
+  const similarItemsModalRef = useRef();
+  const sizeModalRef = useRef();
+
   return (
     <>
       <ScrollView>
@@ -81,7 +83,7 @@ const ProductDisplayScreen = ({ route }) => {
             name="view-carousel-outline"
             size={30}
             color="black"
-            onPress={() => childRef.current.showModal()}
+            onPress={() => similarItemsModalRef.current.showModal()}
           />
         </View>
 
@@ -111,7 +113,7 @@ const ProductDisplayScreen = ({ route }) => {
               name="cart-plus"
               size={30}
               color="black"
-              onPress={displaySizeModalScreenHandler}
+              onPress={() => sizeModalRef.current.showModal()}
             />
           )}
           {addedToCart && (
@@ -126,8 +128,8 @@ const ProductDisplayScreen = ({ route }) => {
           )}
         </View>
       </View>
-      <View style={styles.sizeModal}>{screen}</View>
-      <SimilarItemsModal ref={childRef} style={{ height: "30%" }} />
+      <SizeModalNew ref={sizeModalRef} item={item} test={setAddToCartHandler} />
+      <SimilarItemsModal ref={similarItemsModalRef} style={{ height: "30%" }} />
     </>
   );
 };
@@ -188,6 +190,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     left: 10,
+    bottom: 20,
   },
   viewSimilarContainer: {
     left: "20%",
