@@ -26,7 +26,6 @@ import PhoneAuth from "./Login/PhoneAuth";
 import Login from "./Login/Login";
 import Camera from "./Camera/Camera";
 import { useNavigation } from "@react-navigation/native";
-import SortModal from "./Components/SortModal";
 import FilterMenu from "./Components/FilterMenu";
 import RatingsSection from "./Components/RatingsSection";
 import StarRating from "./Components/StarRating";
@@ -65,7 +64,7 @@ const HomeScreenDrawer = () => {
       />
 
       <Drawer.Screen name="Profile" component={Camera} />
-      <Drawer.Screen name="Orders" component={SortModal} />
+      <Drawer.Screen name="Orders" component={RatingsSection} />
       <Drawer.Screen name="Support" component={FilterMenu} />
       <Drawer.Screen name="Contactus" component={StarRating} />
       <Drawer.Screen name="Logout" component={RatingsSection} />

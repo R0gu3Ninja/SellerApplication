@@ -34,15 +34,13 @@ const SizeModalNew = forwardRef((props, ref) => {
       dispatch(removeFromWishList({ item: props.item }));
       setVisible(false);
       console.log("Added to cart successful");
-      props.test(true);
     } else {
-      Alert.alert("select size");
+      console.log("size not selected : " + sizeSelected);
     }
   };
   const addSizeToProduct = (itemSize) => {
     console.log("getting item : " + props.item);
     console.log("Adding size to product : " + itemSize);
-    //props.item.itemSize = itemSize;
     setSizeSelected(true);
   };
 

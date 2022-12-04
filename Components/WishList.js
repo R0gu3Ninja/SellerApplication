@@ -10,16 +10,12 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromWishList } from "../Store/wishlist";
-import { addToCart } from "../Store/cart";
 import SizeModalNew from "./SizeModalNew";
 
 const WishList = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [displaySizeModalScreen, setDisplaySizeModalScreen] = useState(false);
   const [currentWishListItem, setCurrentWishListItem] = useState();
-  const [screen, setScreen] = useState();
-  const [addedToCart, setAddToCart] = useState(false);
   const sizeModalRef = useRef();
   const wishListItems = useSelector(
     (state) => state.wishListReducer.wishListItems
@@ -28,18 +24,13 @@ const WishList = () => {
     console.log("removeItemFromWishListHandler");
     dispatch(removeFromWishList({ item: item }));
   };
-  const addToCartHandler = (item) => {
-    console.log("addToCartHandler " + item);
-    dispatch(addToCart({ item: item }));
-  };
+
   const displaySizeModalScreenHandler = (item) => {
     console.log("sizeModalRef.current" + sizeModalRef.current);
     setCurrentWishListItem(item);
     sizeModalRef.current.showModal();
   };
-  const setAddToCartHandler = (value) => {
-    setAddToCart(value);
-  };
+
   return (
     <>
       <FlatList
@@ -86,11 +77,7 @@ const WishList = () => {
         numColumns={2}
         keyExtractor={(item, index) => index}
       />
-      <SizeModalNew
-        ref={sizeModalRef}
-        item={currentWishListItem}
-        test={setAddToCartHandler}
-      />
+      <SizeModalNew ref={sizeModalRef} item={currentWishListItem} />
     </>
   );
 };

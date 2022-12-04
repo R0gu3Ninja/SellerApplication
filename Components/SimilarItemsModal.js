@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import { useNavigation } from "@react-navigation/native";
-import { FlatListSlider } from "react-native-flatlist-slider";
 import userImages from "../Images/userImages.png";
 import ProductDescriptionCard from "./ProductDescriptionCard";
 const SimilarItemsModal = forwardRef((props, ref) => {

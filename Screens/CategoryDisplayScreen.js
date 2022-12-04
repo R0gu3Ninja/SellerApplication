@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -11,20 +11,18 @@ import {
 import productImages from "../Images/productImages";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import FilterMenu from "../Components/FilterMenu";
-import SortModal from "../Components/SortModal";
+import SortModalNew from "../Components/SortModalNew";
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import StarRating from "../Components/StarRating";
 const CategoryDisplayScreen = () => {
-  const [screen, setScreen] = useState();
   const navigation = useNavigation();
+  const sortModalRef = useRef();
 
   const showSortOptions = () => {
     console.log("showSortOptions");
-    setScreen(<SortModal />);
+    sortModalRef.current.showModal();
   };
-  const showFilterOptions = () => {
-    setScreen(<FilterMenu />);
-  };
+  const showFilterOptions = () => {};
 
   return (
     <>
@@ -59,7 +57,6 @@ const CategoryDisplayScreen = () => {
         keyExtractor={(item, index) => index}
       />
 
-      <View style={styles.modalContainer}>{screen}</View>
       <View>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttons}>
@@ -67,7 +64,7 @@ const CategoryDisplayScreen = () => {
               name="sort"
               size={30}
               color="black"
-              onPress={showSortOptions}
+              onPress={() => showSortOptions()}
             />
           </View>
           <View style={styles.verticleLine}></View>
@@ -81,6 +78,7 @@ const CategoryDisplayScreen = () => {
           </View>
         </View>
       </View>
+      <SortModalNew ref={sortModalRef} />
     </>
   );
 };

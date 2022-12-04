@@ -6,7 +6,6 @@ import productImages from "../Images/productImages";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../Store/wishlist";
-import { addToCart, removeFromCart } from "../Store/cart";
 import SizeModalNew from "../Components/SizeModalNew";
 
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
@@ -24,9 +23,6 @@ const ProductDisplayScreen = ({ route }) => {
   console.log("wishListItems  :" + wishListItems);
   const [addedToWishList, setAddedToWishList] = useState(false);
   const [addedToCart, setAddToCart] = useState(false);
-  const [similarItemsModal, setSimilarItemsModal] = useState(false);
-
-  const [screen, setScreen] = useState();
 
   const addItemToWishList = () => {
     console.log("Added to WishList id: " + item);
@@ -40,20 +36,8 @@ const ProductDisplayScreen = ({ route }) => {
     setAddedToWishList(false);
   };
 
-  const displaySizeModalScreenHandler = () => {
-    console.log("displaySizeModalScreenHandler : " + item);
-    setScreen(<SizeModalNew item={item} test={setAddToCartHandler} />);
-    //setSizeSelected(true);
-  };
-
   const setAddToCartHandler = (value) => {
     setAddToCart(value);
-  };
-
-  const removeItemFromCart = () => {
-    console.log("Removing from Cart item: " + item);
-    dispatch(removeFromCart({ item: item }));
-    setAddedToWishList(false);
   };
 
   const similarItemsModalRef = useRef();

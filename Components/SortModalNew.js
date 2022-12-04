@@ -1,42 +1,43 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  Button,
-} from "react-native";
+import React, { forwardRef, useState, useImperativeHandle } from "react";
+import { Modal, Portal, Provider } from "react-native-paper";
+import { StyleSheet, View, Pressable, Text } from "react-native";
 
 const ModalOptions = ({ sortOption, onPress }) => {
-  return <Button title={sortOption} onPress={onPress}></Button>;
+  return (
+    <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
+      <Text style={styles.textStyle}>{sortOption}</Text>
+    </Pressable>
+  );
 };
-const SortModal = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+const SortModalNew = forwardRef((props, ref) => {
+  const [visible, setVisible] = useState(false);
   const [filterCriteria, setFilterCriteria] = useState("NEWEST_ARRIVALS");
 
-  useEffect(() => {
-    console.log("filter criteria changed : " + filterCriteria);
-  }, [filterCriteria]);
-
   const setFilterCriteriaHandler = (filterCriteria) => {
+    console.log("filter Criteria : " + filterCriteria);
     setFilterCriteria(filterCriteria);
-    setModalVisible(!modalVisible);
+    hideModal();
   };
+  useImperativeHandle(ref, () => ({
+    showModal() {
+      console.log("Displaying Similar Items Modal : " + visible);
+      setVisible(true);
+    },
+  }));
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
 
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View>
+    <Provider>
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.containerStyle}
+        >
+          <Text style={styles.selectHeader}>Sort By</Text>
+
+          <View style={styles.modalView}>
             <ModalOptions
               sortOption="Newest Arrivals"
               onPress={() => setFilterCriteriaHandler("NEWEST_ARRIVALS")}
@@ -58,25 +59,24 @@ const SortModal = () => {
               onPress={() => setFilterCriteriaHandler("HIGH_TO_LOW")}
             ></ModalOptions>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </Portal>
+    </Provider>
   );
-};
-
+});
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "100%",
   },
   modalView: {
+    left: 60,
+    top: -10,
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-
-    alignItems: "center",
+    flexDirection: "column",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -85,14 +85,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: 200,
   },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "white",
@@ -103,10 +101,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+
+  containerStyle: {
+    maxHeight: 400,
+    backgroundColor: "red",
+  },
+  selectHeader: {
+    fontSize: 20,
+    color: "white",
   },
 });
-
-export default SortModal;
+export default SortModalNew;
