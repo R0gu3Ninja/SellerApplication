@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import { FlatListSlider } from "react-native-flatlist-slider";
 import { useNavigation } from "@react-navigation/native";
@@ -12,17 +12,20 @@ import SizeModal from "../Components/SizeModal";
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import CommentsSection from "../Components/CommentsSection";
 import RatingsSection from "../Components/RatingsSection";
+import SimilarItemsModal from "../Components/SimilarItemsModal";
+
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
   const item = route.params.item;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  console.log("Product Id :" + item);
+  console.log("Product Id :" + item.productId);
   const wishListItems = useSelector((state) => state.wishListReducer);
   console.log("wishListItems  :" + wishListItems);
   const [addedToWishList, setAddedToWishList] = useState(false);
   const [addedToCart, setAddToCart] = useState(false);
-  addedToCart;
+  const [similarItemsModal, setSimilarItemsModal] = useState(false);
+
   const [screen, setScreen] = useState();
 
   const addItemToWishList = () => {
@@ -55,8 +58,9 @@ const ProductDisplayScreen = ({ route }) => {
 
   const viewSimilarItems = () => {
     console.log("View similar");
+    setSimilarItemsModal(true);
   };
-
+  const childRef = useRef();
   return (
     <>
       <ScrollView>
@@ -81,7 +85,7 @@ const ProductDisplayScreen = ({ route }) => {
               name="view-carousel-outline"
               size={30}
               color="black"
-              onPress={console.log("similar")}
+              onPress={() => childRef.current.showModal()}
             />
           </View>
         </Pressable>
@@ -104,7 +108,7 @@ const ProductDisplayScreen = ({ route }) => {
             <Ionicons name="heart" size={30} onPress={removeItemFromWishList} />
           </View>
         )}
-
+        <View style={styles.verticalLine}></View>
         <View style={styles.buttons}>
           {!addedToCart && (
             <MaterialCommunityIcons
@@ -117,6 +121,7 @@ const ProductDisplayScreen = ({ route }) => {
           {addedToCart && (
             <MaterialCommunityIcons
               name="cart-arrow-right"
+              size={30}
               color="black"
               onPress={() => {
                 navigation.navigate("Cart");
@@ -126,6 +131,7 @@ const ProductDisplayScreen = ({ route }) => {
         </View>
       </View>
       <View style={styles.sizeModal}>{screen}</View>
+      <SimilarItemsModal ref={childRef} style={{ height: "30%" }} />
     </>
   );
 };
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
-    left: 40,
+    left: 75,
   },
   container: {
     flex: 1,
@@ -169,6 +175,12 @@ const styles = StyleSheet.create({
   },
   sizeModal: {
     height: "0%",
+  },
+  verticalLine: {
+    marginLeft: 5,
+    width: 2,
+    height: "100%",
+    backgroundColor: "black",
   },
   similarItems: {
     top: 40,
