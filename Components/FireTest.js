@@ -7,9 +7,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-
-import images from "../Images/productImages";
-import MyPhoto from "../shirt.jpg";
 import { useNavigation } from "@react-navigation/native";
 import firebase from "../firebase";
 const FilterTest = (props) => {
@@ -18,6 +15,7 @@ const FilterTest = (props) => {
   const productImagesRef = firebase.storage().ref("ProductImages");
 
   useEffect(() => {
+    setProductImages([]);
     productImagesRef
       .list()
       .then(function (result) {
@@ -29,19 +27,35 @@ const FilterTest = (props) => {
         // Handle any errors
       });
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProductImages([]);
+      productImagesRef
+        .list()
+        .then(function (result) {
+          result.items.forEach(function (imageRef) {
+            displayImage(imageRef);
+          });
+        })
+        .catch(function (error) {
+          // Handle any errors
+        });
+    }, 20000);
+  }, []);
+
   function displayImage(imageRef) {
     imageRef
       .getDownloadURL()
       .then(function (url) {
         console.log(url);
-
         setProductImages((prevImg) => [...prevImg, "" + url]);
       })
       .catch(function (error) {
         // Handle any errors
       });
   }
-  console.log("productImagesTest" + productImagesTest[0]);
+
   return (
     <FlatList
       data={productImagesTest}
