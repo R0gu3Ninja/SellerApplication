@@ -7,35 +7,60 @@ const Fetch = () => {
   const [users, setUsers] = useState();
   const todoRef = firebase.firestore().collection("todos");
   const [imageUri, setImageUri] = useState(null);
-
+  const [imagesBulk, setImages] = useState([]);
+  const [productImages, setProductImages] = useState([]);
   const pickImage = async () => {
     let cameraResult = await ImagePicker.launchCameraAsync();
     setImageUri(cameraResult.uri);
   };
 
+  const uploadImageBulk = async () => {
+    console.log("uploadImageBulk");
+    imagesBulk.map(async (img) => {
+      const response = await fetch(img);
+      const blob = await response.blob();
+      const filename = img.substring(img.lastIndexOf("/") + 1);
+      var ref = firebase
+        .storage()
+        .ref("ProductImages")
+        .child(filename)
+        .put(blob);
+      try {
+        await ref;
+      } catch (e) {
+        console.log(e);
+      }
+    });
+  };
   const uploadImage = async () => {
-    console.log("0");
     const response = await fetch(imageUri);
-    console.log("1");
     const blob = await response.blob();
-    console.log("2");
     const filename = imageUri.substring(imageUri.lastIndexOf("/") + 1);
-    console.log(filename);
-    var ref = firebase.storage().ref().child(filename).put(blob);
-    console.log("4");
+    var ref = firebase.storage().ref("Test").child(filename).put(blob);
     try {
       await ref;
-      console.log("5");
     } catch (e) {
       console.log(e);
     }
   };
 
-  const addField = () => {
+  const addDescription = () => {
     const data = { heading: "JB", text: "P" };
     todoRef.add(data).catch(console.log("error"));
   };
 
+  const AddImage = (newImage) => {
+    setImages((prevImgs) => [...prevImgs, newImage]);
+    setImageUri(null);
+  };
+
+  const getImages = () => {
+    productImageRef.onSnapshot((querySnapShot) => {
+      querySnapShot.forEach((doc) =>
+        setProductImages((prevImages) => [...prevImages, doc.data()])
+      );
+    });
+  };
   useEffect(() => {
     {
       todoRef.onSnapshot((querySnapShot) => {
@@ -52,10 +77,11 @@ const Fetch = () => {
   return (
     <>
       <View>
-        <Button title="Send" onPress={uploadImage}></Button>
+        <Button title="Send" onPress={uploadImageBulk}></Button>
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
+        <Button title="Add Image" onPress={() => AddImage(imageUri)} />
         {imageUri && (
           <Image
             source={{ uri: imageUri }}

@@ -29,6 +29,7 @@ import Fetch from "./Components/Fetch";
 import RatingsSection from "./Components/RatingsSection";
 import StarRating from "./Components/StarRating";
 import CommentCard from "./Components/CommentCard";
+import FireTest from "./Components/FireTest";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -65,7 +66,7 @@ const HomeScreenDrawer = () => {
       <Drawer.Screen name="Profile" component={Camera} />
       <Drawer.Screen name="Orders" component={RatingsSection} />
       <Drawer.Screen name="Support" component={Fetch} />
-      <Drawer.Screen name="Contactus" component={StarRating} />
+      <Drawer.Screen name="Contactus" component={FireTest} />
       <Drawer.Screen name="Logout" component={RatingsSection} />
     </Drawer.Navigator>
   );
