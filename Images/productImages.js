@@ -2,7 +2,8 @@ const images = [
   {
     productId: "1",
     shopId: "1",
-    image: "https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/signin-d4d32.appspot.com/o/god.JPG?alt=media&token=4f251612-9e0f-4ab6-8860-3adfea1ee887",
     desc: "Silent Waters in the mountains in midst of Himilayas",
     category: "shirt",
     featured: "true",

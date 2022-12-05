@@ -2,6 +2,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "@firebase/auth";
+import "firebase/compat/storage";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBRpGsKKV27WJdgmqhU1HMTA0ki8sDeIbQ",
   authDomain: "signin-d4d32.firebaseapp.com",
@@ -12,8 +14,9 @@ const firebaseConfig = {
   measurementId: "G-4H0QEER3V5",
 };
 
-if (!firebase.apps.length) {
-  console.log("firebase config");
-  firebase.initializeApp(firebaseConfig);
-}
+console.log("firebase config");
+firebase.initializeApp(firebaseConfig);
+firebase.firestore().settings({ experimentalForceLongPolling: true });
+//const storage = getStorage();
+
 export default firebase;

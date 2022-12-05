@@ -10,19 +10,22 @@ import {
 } from "react-native";
 import productImages from "../Images/productImages";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import FilterMenu from "../Components/FilterMenu";
+import FilterMenuModal from "../Components/FilterMenuModal";
 import SortModalNew from "../Components/SortModalNew";
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import StarRating from "../Components/StarRating";
 const CategoryDisplayScreen = () => {
   const navigation = useNavigation();
   const sortModalRef = useRef();
-
+  const filterMenuModalRef = useRef();
   const showSortOptions = () => {
     console.log("showSortOptions");
     sortModalRef.current.showModal();
   };
-  const showFilterOptions = () => {};
+  const showFilterOptions = () => {
+    console.log("showFilterOptions");
+    filterMenuModalRef.current.showModal();
+  };
 
   return (
     <>
@@ -73,12 +76,13 @@ const CategoryDisplayScreen = () => {
               name="filter"
               size={30}
               color="black"
-              onPress={showFilterOptions}
+              onPress={() => showFilterOptions()}
             />
           </View>
         </View>
       </View>
       <SortModalNew ref={sortModalRef} />
+      <FilterMenuModal ref={filterMenuModalRef} />
     </>
   );
 };

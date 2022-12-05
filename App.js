@@ -22,11 +22,10 @@ import {
 } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import globalStore from "./Store/index";
-import PhoneAuth from "./Login/PhoneAuth";
-import Login from "./Login/Login";
+
 import Camera from "./Camera/Camera";
 import { useNavigation } from "@react-navigation/native";
-import FilterMenu from "./Components/FilterMenu";
+import Fetch from "./Components/Fetch";
 import RatingsSection from "./Components/RatingsSection";
 import StarRating from "./Components/StarRating";
 import CommentCard from "./Components/CommentCard";
@@ -65,7 +64,7 @@ const HomeScreenDrawer = () => {
 
       <Drawer.Screen name="Profile" component={Camera} />
       <Drawer.Screen name="Orders" component={RatingsSection} />
-      <Drawer.Screen name="Support" component={FilterMenu} />
+      <Drawer.Screen name="Support" component={Fetch} />
       <Drawer.Screen name="Contactus" component={StarRating} />
       <Drawer.Screen name="Logout" component={RatingsSection} />
     </Drawer.Navigator>
@@ -173,8 +172,6 @@ const MainNavigator = () => {
         <Stack.Screen name="ShopDisplayScreen" component={ShopDisplayScreen} />
         <Stack.Screen name="WishList" component={WishList} />
         <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
-        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Camera" component={Camera} />
       </Stack.Navigator>
     </NavigationContainer>
