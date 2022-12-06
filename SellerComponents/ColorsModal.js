@@ -14,7 +14,7 @@ const ColorsModal = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const addColorToProductBuilder = (item) => {
     console.log("Adding Size: " + item);
-    dispatch(addProductDetails({ item: "color: " + item, key: 1 }));
+    dispatch(addProductDetails({ item: item, key: 1 }));
   };
   const [visible, setVisible] = useState(false);
 
@@ -35,6 +35,7 @@ const ColorsModal = forwardRef((props, ref) => {
     console.log("Adding size to product : " + itemColor);
     setcolorSelected(itemColor);
     addColorToProductBuilder(itemColor);
+    hideModal();
   };
 
   useImperativeHandle(ref, () => ({

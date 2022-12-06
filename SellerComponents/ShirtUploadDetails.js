@@ -33,11 +33,11 @@ const ShirtUploadDetails = () => {
 
   const addSizeToProductBuilder = (item) => {
     console.log("Adding Size: " + item);
-    dispatch(addProductDetails({ item: "size: " + item, key: 0 }));
+    dispatch(addProductDetails({ item: item, key: 0 }));
   };
   const addPriceToProductBuilder = (item) => {
     console.log("Adding Price: " + item);
-    dispatch(addProductDetails({ item: "price: " + item, key: 4 }));
+    dispatch(addProductDetails({ item: item, key: 4 }));
   };
   const ColorsModalRef = useRef();
   const TypesModalRef = useRef();

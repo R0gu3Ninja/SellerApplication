@@ -2,10 +2,10 @@ import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Modal, Portal, Provider } from "react-native-paper";
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-const ModalOptions = ({ sortOption, onPress }) => {
+const ModalOptions = ({ productOption, onPress }) => {
   return (
     <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{sortOption}</Text>
+      <Text style={styles.textStyle}>{productOption}</Text>
     </Pressable>
   );
 };
@@ -25,11 +25,7 @@ const AddProductModal = forwardRef((props, ref) => {
   return (
     <Provider>
       <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          contentContainerStyle={styles.containerStyle}
-        >
+        <Modal visible={visible} onDismiss={hideModal}>
           <View style={styles.modalView}>
             <ModalOptions
               productOption="Shirts"

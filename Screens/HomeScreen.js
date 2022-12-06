@@ -8,19 +8,14 @@ const HomeScreen = ({ navigation }) => {
     AddProductModalRef.current.showModal();
   };
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <View>
-          <Pressable
-            onPress={displaySelectionsModal}
-            style={styles.headerIcons}
-          >
-            <AntDesign name="addfile" size={24} color="black" />
-          </Pressable>
-        </View>
-        <AddProductModal ref={AddProductModalRef} />
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.addFileView}>
+        <Pressable onPress={displaySelectionsModal}>
+          <AntDesign name="addfile" size={80} color="black" />
+        </Pressable>
+      </View>
+      <AddProductModal ref={AddProductModalRef} />
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
@@ -28,20 +23,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "flex-start",
-    alignContent: "center",
+    justifyContent: "center",
   },
-  scrollview: {
+  addFileView: {
     flex: 1,
     backgroundColor: "#fff",
     alignContent: "center",
-  },
-  statusbar: {
-    flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "flex-start",
-    alignContent: "center",
+    justifyContent: "center",
   },
 });
 export default HomeScreen;

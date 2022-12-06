@@ -14,7 +14,7 @@ const DesignModal = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const addDesignToProductBuilder = (item) => {
     console.log("Adding item: " + item);
-    dispatch(addProductDetails({ item: "design: " + item, key: 3 }));
+    dispatch(addProductDetails({ item: item, key: 3 }));
   };
   const [visible, setVisible] = useState(false);
 
@@ -25,6 +25,7 @@ const DesignModal = forwardRef((props, ref) => {
     console.log("Adding size to product : " + itemDesign);
     setDesignSelected(itemDesign);
     addDesignToProductBuilder(itemDesign);
+    hideModal();
   };
 
   useImperativeHandle(ref, () => ({
