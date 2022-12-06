@@ -6,11 +6,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
 import CategoryDisplayScreen from "./Screens/CategoryDisplayScreen";
+import AddProductImages from "./SellerComponents/AddProductImages";
 import ShopDisplayScreen from "./Screens/ShopDisplayScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import HeaderIcons from "./Components/HeaderIcons";
 import logo from "./local.jpg";
-import WishList from "./Components/WishList";
+import ShirtUploadDetails from "./SellerComponents/ShirtUploadDetails";
 import Cart from "./Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -171,9 +172,12 @@ const MainNavigator = () => {
           component={CategoryDisplayScreen}
         />
         <Stack.Screen name="ShopDisplayScreen" component={ShopDisplayScreen} />
-        <Stack.Screen name="WishList" component={WishList} />
+        <Stack.Screen
+          name="ShirtUploadDetails"
+          component={ShirtUploadDetails}
+        />
         <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="AddProductImages" component={AddProductImages} />
       </Stack.Navigator>
     </NavigationContainer>
   );

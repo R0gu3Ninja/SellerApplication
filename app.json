@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Local",
-    "slug": "Homescreen",
+    "name": "LocalSeller",
+    "slug": "localseller",
     "plugins": [
       [
         "expo-image-picker",
@@ -23,7 +23,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -33,14 +35,17 @@
         "foregroundImage": "./assets/local.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.jayendrabhaskar.Homescreen"
+      "package": "com.jayendrabhaskar.Homescreen",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/local.png"
     },
     "extra": {
       "eas": {
-        "projectId": "04aa0fe8-f7ee-4edc-b354-f4ffe5cda80b"
+        "projectId": "411ca42f-c272-4f3d-9f48-1ae19ac5f31e"
       },
       "firebase": {
         "apiKey": "AIzaSyBRpGsKKV27WJdgmqhU1HMTA0ki8sDeIbQ",
@@ -51,6 +56,7 @@
         "appId": "1:238728598242:web:f0fe21f4f10144a3ec84bb",
         "measurementId": "G-4H0QEER3V5"
       }
-    }
+    },
+    "owner": "jayendrabhaskar"
   }
 }

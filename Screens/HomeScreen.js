@@ -1,26 +1,24 @@
-import { React, useLayoutEffect } from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
-import ProductCarousel from "../Components/ProductCarousel";
-import ShopCarousel from "../Components/ShopCarousel";
-import CategoryCarousel from "../Components/CategoryCarousel";
-
+import { React, useRef } from "react";
+import { StyleSheet, View, SafeAreaView, Pressable } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import AddProductModal from "../SellerComponents/AddProductModal";
 const HomeScreen = ({ navigation }) => {
+  const AddProductModalRef = useRef();
+  const displaySelectionsModal = () => {
+    AddProductModalRef.current.showModal();
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <View>
-          <CategoryCarousel />
+          <Pressable
+            onPress={displaySelectionsModal}
+            style={styles.headerIcons}
+          >
+            <AntDesign name="addfile" size={24} color="black" />
+          </Pressable>
         </View>
-        <View style={styles.scrollview}>
-          <ScrollView>
-            <View>
-              <ProductCarousel />
-            </View>
-            <View>
-              <ShopCarousel />
-            </View>
-          </ScrollView>
-        </View>
+        <AddProductModal ref={AddProductModalRef} />
       </SafeAreaView>
     </View>
   );
