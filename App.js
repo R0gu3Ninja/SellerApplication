@@ -11,7 +11,10 @@ import ShopDisplayScreen from "./Screens/ShopDisplayScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import HeaderIcons from "./Components/HeaderIcons";
 import logo from "./local.jpg";
-import ShirtUploadDetails from "./SellerComponents/ShirtUploadDetails";
+import ShirtUploadDetails from "./SellerComponents/ShirtUploadSection/ShirtUploadDetails";
+import TShirtUploadDetails from "./SellerComponents/TShirtUploadSection/TShirtUploadDetails";
+import JeansUploadDetails from "./SellerComponents/JeansUploadSection/JeansUploadDetails";
+import AddProductModal from "./SellerComponents/AddProductModal";
 import Cart from "./Components/Cart";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -168,14 +171,18 @@ const MainNavigator = () => {
           component={ProductDisplayScreen}
         />
         <Stack.Screen
-          name="CategoryDisplayScreen"
-          component={CategoryDisplayScreen}
+          name="JeansUploadDetails"
+          component={JeansUploadDetails}
         />
-        <Stack.Screen name="ShopDisplayScreen" component={ShopDisplayScreen} />
+        <Stack.Screen
+          name="TShirtUploadDetails"
+          component={TShirtUploadDetails}
+        />
         <Stack.Screen
           name="ShirtUploadDetails"
           component={ShirtUploadDetails}
         />
+
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="AddProductImages" component={AddProductImages} />
       </Stack.Navigator>

@@ -1,50 +1,67 @@
 import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Modal, Portal, Provider } from "react-native-paper";
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-const ModalOptions = ({ productOption, onPress }) => {
+import { useDispatch } from "react-redux";
+import { addProductDetails } from "../../Store/productDetails";
+const ModalOptions = ({ color, onPress }) => {
   return (
     <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{productOption}</Text>
+      <Text style={styles.textStyle}>{color}</Text>
     </Pressable>
   );
 };
-
-const AddProductModal = forwardRef((props, ref) => {
-  const navigation = useNavigation();
+const ColorsModal = forwardRef((props, ref) => {
+  const dispatch = useDispatch();
+  const addColorToProductBuilder = (item) => {
+    dispatch(addProductDetails({ item: item, key: 2 }));
+  };
   const [visible, setVisible] = useState(false);
+
+  const availableColors = [
+    "RED",
+    "BLUE",
+    "BLACK",
+    "WHITE",
+    "GREY",
+    "YELLOW",
+    "PINK",
+    "GREEN",
+    "BROWN",
+  ];
+  const [colorSelected, setcolorSelected] = useState("");
+  const [handler, setHandler] = useState();
+  const addColorToProduct = (itemColor) => {
+    setcolorSelected(itemColor);
+    addColorToProductBuilder(itemColor);
+    hideModal();
+  };
 
   useImperativeHandle(ref, () => ({
     showModal() {
-      console.log("Displaying Similar Items Modal : " + visible);
       setVisible(true);
     },
+    setColorAfterSelect() {},
   }));
   const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const hideModal = () => {
+    setVisible(false);
+  };
 
   return (
     <Provider>
       <Portal>
-        <Modal visible={visible} onDismiss={hideModal}>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.containerStyle}
+        >
           <View style={styles.modalView}>
-            <ModalOptions
-              productOption="Shirts"
-              onPress={() => navigation.navigate("ShirtUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="T-Shirt"
-              onPress={() => navigation.navigate("TShirtUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="Jeans"
-              onPress={() => navigation.navigate("JeansUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="Trousers"
-              onPress={() => navigation.navigate("TrousersUploadDetails")}
-            ></ModalOptions>
+            {availableColors.map((color) => (
+              <ModalOptions
+                color={color}
+                onPress={() => addColorToProduct(color)}
+              ></ModalOptions>
+            ))}
           </View>
         </Modal>
       </Portal>
@@ -98,4 +115,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-export default AddProductModal;
+export default ColorsModal;

@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Text, Image, View, StyleSheet, Button, FlatList } from "react-native";
 import firebase from "../firebase";
-import { useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductImages } from "../Store/productDetails";
+import { useNavigation } from "@react-navigation/native";
+
 const AddProductImages = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [imageUri, setImageUri] = useState(null);
   const [imagesBulk, setImages] = useState([]);
   const [productImages, setProductImages] = useState([]);
@@ -26,6 +28,7 @@ const AddProductImages = () => {
 
   const uploadImageBulk = async () => {
     console.log("uploadImageBulk");
+    let key = 0;
     imagesBulk.map(async (img) => {
       const response = await fetch(img);
       const blob = await response.blob();
@@ -38,7 +41,8 @@ const AddProductImages = () => {
       try {
         await ref;
         ref.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          dispatch(addProductImages({ item: downloadURL }));
+          dispatch(addProductImages({ item: downloadURL, key: key }));
+          key++;
         });
       } catch (e) {
         console.log(e);
@@ -59,19 +63,44 @@ const AddProductImages = () => {
     console.log("productImagesForPublishing :: ");
 
     const productDetailsRef = firebase.firestore().collection("ProductDetails");
-
     const productData = {
-      size: productDetailsForPublishing[0],
-      color: productDetailsForPublishing[1],
-      type: productDetailsForPublishing[2],
-      design: productDetailsForPublishing[3],
-      price: productDetailsForPublishing[4],
+      category: productDetailsForPublishing[0],
+      size: productDetailsForPublishing[1],
+      color: productDetailsForPublishing[2],
+      type: productDetailsForPublishing[3],
+      design: productDetailsForPublishing[4],
+      price: productDetailsForPublishing[5],
       image1: productImagesForPublishing[0],
       image2: productImagesForPublishing[1],
-      image3: productImagesForPublishing[2],
-      image4: productImagesForPublishing[3],
+      shopId: "12345",
+      shopName: "XLent",
+      shopDescription: "Good Place for quality TShirts,Shirts and Men Wear",
+      /*commentsSection: [
+        {
+          comment1: ["Very Good Product ", 5, "JB"],
+          comment2: ["Okay ", 4, "RP"],
+          comment3: ["Not BAd ", 3, "SI"],
+         comment2: [
+            { comment: "Nice Fit " },
+            { raing: 2 },
+            { user: "Rathode" },
+          ],
+          comment3: [
+            { comment: "Good, Very Very Good Product " },
+            { raing: 3 },
+            { user: "Appu" },
+          ],
+          comment4: [{ comment: "Wow" }, { raing: 4 }, { user: "Ishu" }],
+          comment5: [
+            { comment: "Poor Quality" },
+            { raing: 1 },
+            { user: "Renu" },
+          ],
+        },
+      ],*/
     };
     productDetailsRef.add(productData).catch((error) => console.log(error));
+    navigation.navigate("HomeScreen");
   };
 
   return (

@@ -1,23 +1,33 @@
 import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Modal, Portal, Provider } from "react-native-paper";
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-const ModalOptions = ({ productOption, onPress }) => {
+import { useDispatch } from "react-redux";
+import { addProductDetails } from "../../Store/productDetails";
+const ModalOptions = ({ collar, onPress }) => {
   return (
     <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{productOption}</Text>
+      <Text style={styles.textStyle}>{collar}</Text>
     </Pressable>
   );
 };
-
-const AddProductModal = forwardRef((props, ref) => {
-  const navigation = useNavigation();
+const CollarModal = forwardRef((props, ref) => {
+  const dispatch = useDispatch();
+  const addCollarToProductBuilder = (item) => {
+    dispatch(addProductDetails({ item: item, key: 6 }));
+  };
   const [visible, setVisible] = useState(false);
+
+  const availableTypess = ["Roud", "V-Neck", "Chinese", "Collar"];
+  const [typeSelected, setTypeSelected] = useState("");
+  const addCollarToProduct = (collarType) => {
+    console.log("Adding type to product : " + collarType);
+    setTypeSelected(collarType);
+    addCollarToProductBuilder(collarType);
+    hideModal();
+  };
 
   useImperativeHandle(ref, () => ({
     showModal() {
-      console.log("Displaying Similar Items Modal : " + visible);
       setVisible(true);
     },
   }));
@@ -27,24 +37,18 @@ const AddProductModal = forwardRef((props, ref) => {
   return (
     <Provider>
       <Portal>
-        <Modal visible={visible} onDismiss={hideModal}>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.containerStyle}
+        >
           <View style={styles.modalView}>
-            <ModalOptions
-              productOption="Shirts"
-              onPress={() => navigation.navigate("ShirtUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="T-Shirt"
-              onPress={() => navigation.navigate("TShirtUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="Jeans"
-              onPress={() => navigation.navigate("JeansUploadDetails")}
-            ></ModalOptions>
-            <ModalOptions
-              productOption="Trousers"
-              onPress={() => navigation.navigate("TrousersUploadDetails")}
-            ></ModalOptions>
+            {availableTypess.map((collar) => (
+              <ModalOptions
+                collar={collar}
+                onPress={() => addCollarToProduct(collar)}
+              ></ModalOptions>
+            ))}
           </View>
         </Modal>
       </Portal>
@@ -98,4 +102,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-export default AddProductModal;
+export default CollarModal;

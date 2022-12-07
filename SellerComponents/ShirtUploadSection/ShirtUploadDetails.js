@@ -1,47 +1,51 @@
 import { Text, View, Pressable, StyleSheet, TextInput } from "react-native";
 import { useState, useRef } from "react";
 import ColorsModal from "./ColorsModal";
+import CollarModal from "./CollarModal";
+import FabricModal from "./FabricModal";
 import TypesModal from "./TypesModal";
 import DesignModal from "./DesignModal";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductDetails } from "../Store/productDetails";
+import { addProductDetails } from "../../Store/productDetails";
 import { useNavigation } from "@react-navigation/native";
-import AddProductImages from "./AddProductImages";
 
-const SizeOptions = ({ sizeOption, onPress }) => {
-  return (
-    <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{sizeOption}</Text>
-    </Pressable>
-  );
-};
-
-const gotoAddImagesScreen = () => {
-  console.log("gotoAddImagesScreen");
-};
 const ShirtUploadDetails = () => {
+  const SizeOptions = ({ sizeOption, onPress }) => {
+    return (
+      <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
+        <Text style={styles.textStyle}>{sizeOption}</Text>
+      </Pressable>
+    );
+  };
   const availableSizes = ["S", "M", "L", "XL", "XXL"];
-  const [sizeSelected, setSelectedSize] = useState("");
+  const [sizeSelected, setSelectedSize] = useState(false);
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const addSizeToProduct = (itemSize) => {
     console.log("Adding size to product : " + itemSize);
-    setSelectedSize(itemSize);
+    setSelectedSize(true);
     addSizeToProductBuilder(itemSize);
+    addCategoryToProductBuilder();
   };
 
+  const addCategoryToProductBuilder = () => {
+    dispatch(addProductDetails({ item: "SHIRT", key: 0 }));
+  };
   const addSizeToProductBuilder = (item) => {
     console.log("Adding Size: " + item);
-    dispatch(addProductDetails({ item: item, key: 0 }));
+    dispatch(addProductDetails({ item: item, key: 1 }));
   };
   const addPriceToProductBuilder = (item) => {
     console.log("Adding Price: " + item);
-    dispatch(addProductDetails({ item: item, key: 4 }));
+    dispatch(addProductDetails({ item: item, key: 5 }));
   };
   const ColorsModalRef = useRef();
   const TypesModalRef = useRef();
   const DesignModalRef = useRef();
+  const CollarModalRef = useRef();
+  const FabricModalRef = useRef();
   const openTypesModal = () => {
     TypesModalRef.current.showModal();
   };
@@ -53,6 +57,12 @@ const ShirtUploadDetails = () => {
   const openDesignModal = () => {
     DesignModalRef.current.showModal();
   };
+  const openFabricModal = () => {
+    FabricModalRef.current.showModal();
+  };
+  const openCollarModal = () => {
+    CollarModalRef.current.showModal();
+  };
 
   return (
     <View>
@@ -61,22 +71,33 @@ const ShirtUploadDetails = () => {
           <SizeOptions
             sizeOption={item}
             onPress={() => addSizeToProduct(item)}
+            sizeSelected={sizeSelected}
           ></SizeOptions>
         ))}
       </View>
       <View>
         <Pressable onPress={openColorsModal}>
-          <Text style={styles.textStyle}>SELECT Colors</Text>
+          <Text style={styles.textStyle}>Select Color</Text>
         </Pressable>
       </View>
       <View>
         <Pressable onPress={openTypesModal}>
-          <Text style={styles.textStyle}>SELECT Type</Text>
+          <Text style={styles.textStyle}>Select Type</Text>
         </Pressable>
       </View>
       <View>
         <Pressable onPress={openDesignModal}>
-          <Text style={styles.textStyle}>SELECT Design</Text>
+          <Text style={styles.textStyle}>Select Design</Text>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable onPress={openFabricModal}>
+          <Text style={styles.textStyle}>Select Fabric</Text>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable onPress={openCollarModal}>
+          <Text style={styles.textStyle}>Select Collar</Text>
         </Pressable>
       </View>
       <TextInput
@@ -101,6 +122,8 @@ const ShirtUploadDetails = () => {
       <ColorsModal ref={ColorsModalRef} />
       <TypesModal ref={TypesModalRef} />
       <DesignModal ref={DesignModalRef} />
+      <CollarModal ref={CollarModalRef} />
+      <FabricModal ref={FabricModalRef} />
     </View>
   );
 };
@@ -136,6 +159,12 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
+  coloredButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    color: "red",
+  },
   buttonClose: {
     backgroundColor: "white",
   },
@@ -144,6 +173,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     padding: 10,
+    marginBottom: 10,
   },
   modalText: {
     marginBottom: 15,
@@ -159,7 +189,7 @@ const styles = StyleSheet.create({
   },
   sizeDisplay: {
     flexDirection: "row",
-
+    left: 50,
     width: 200,
     height: 70,
     maxHeight: 70,

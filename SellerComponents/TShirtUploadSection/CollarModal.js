@@ -1,29 +1,28 @@
 import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Modal, Portal, Provider } from "react-native-paper";
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { addProductDetails } from "../Store/productDetails";
-const ModalOptions = ({ type, onPress }) => {
+import { useDispatch } from "react-redux";
+import { addProductDetails } from "../../Store/productDetails";
+const ModalOptions = ({ collar, onPress }) => {
   return (
     <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-      <Text style={styles.textStyle}>{type}</Text>
+      <Text style={styles.textStyle}>{collar}</Text>
     </Pressable>
   );
 };
-const ColorsModal = forwardRef((props, ref) => {
+const CollarModal = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const addTypeToProductBuilder = (item) => {
-    console.log("Adding item: " + item);
-    dispatch(addProductDetails({ item: item, key: 2 }));
+  const addCollarToProductBuilder = (item) => {
+    dispatch(addProductDetails({ item: item, key: 6 }));
   };
   const [visible, setVisible] = useState(false);
 
-  const availableTypess = ["HalfHands", "FullHands", "MandarinCollar"];
+  const availableTypess = ["Round", "V-Neck", "Mandarin", "Normal"];
   const [typeSelected, setTypeSelected] = useState("");
-  const addTypeToProduct = (itemType) => {
-    console.log("Adding type to product : " + itemType);
-    setTypeSelected(itemType);
-    addTypeToProductBuilder(itemType);
+  const addCollarToProduct = (collarType) => {
+    console.log("Adding type to product : " + collarType);
+    setTypeSelected(collarType);
+    addCollarToProductBuilder(collarType);
     hideModal();
   };
 
@@ -43,13 +42,11 @@ const ColorsModal = forwardRef((props, ref) => {
           onDismiss={hideModal}
           contentContainerStyle={styles.containerStyle}
         >
-          <Text style={styles.selectHeader}>Sort By</Text>
-
           <View style={styles.modalView}>
-            {availableTypess.map((type) => (
+            {availableTypess.map((collar) => (
               <ModalOptions
-                type={type}
-                onPress={() => addTypeToProduct(type)}
+                collar={collar}
+                onPress={() => addCollarToProduct(collar)}
               ></ModalOptions>
             ))}
           </View>
@@ -105,4 +102,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-export default ColorsModal;
+export default CollarModal;

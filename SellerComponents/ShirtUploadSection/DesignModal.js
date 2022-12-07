@@ -2,7 +2,7 @@ import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Modal, Portal, Provider } from "react-native-paper";
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductDetails } from "../Store/productDetails";
+import { addProductDetails } from "../../Store/productDetails";
 const ModalOptions = ({ design, onPress }) => {
   return (
     <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
@@ -13,8 +13,7 @@ const ModalOptions = ({ design, onPress }) => {
 const DesignModal = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const addDesignToProductBuilder = (item) => {
-    console.log("Adding item: " + item);
-    dispatch(addProductDetails({ item: item, key: 3 }));
+    dispatch(addProductDetails({ item: item, key: 4 }));
   };
   const [visible, setVisible] = useState(false);
 
@@ -44,8 +43,6 @@ const DesignModal = forwardRef((props, ref) => {
           onDismiss={hideModal}
           contentContainerStyle={styles.containerStyle}
         >
-          <Text style={styles.selectHeader}>Sort By</Text>
-
           <View style={styles.modalView}>
             {availableDesign.map((design) => (
               <ModalOptions
