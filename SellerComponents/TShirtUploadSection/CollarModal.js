@@ -17,7 +17,7 @@ const CollarModal = forwardRef((props, ref) => {
   };
   const [visible, setVisible] = useState(false);
 
-  const availableTypess = ["Round", "V-Neck", "Mandarin", "Normal"];
+  const availableTypess = ["Round", "V-Neck", "Mandarin", "Collar"];
   const [typeSelected, setTypeSelected] = useState("");
   const addCollarToProduct = (collarType) => {
     console.log("Adding type to product : " + collarType);

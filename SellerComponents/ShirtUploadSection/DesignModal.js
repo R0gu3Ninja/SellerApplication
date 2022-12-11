@@ -17,7 +17,7 @@ const DesignModal = forwardRef((props, ref) => {
   };
   const [visible, setVisible] = useState(false);
 
-  const availableDesign = ["SOLID", "CHECKED", "STRIPES", "PRINTED"];
+  const availableDesign = ["Solid", "Checked", "Stripes", "Printed"];
   const [designSelected, setDesignSelected] = useState("");
 
   const addDesignToProduct = (itemDesign) => {

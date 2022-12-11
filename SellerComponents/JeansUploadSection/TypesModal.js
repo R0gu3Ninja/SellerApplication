@@ -18,7 +18,7 @@ const TypesModal = forwardRef((props, ref) => {
   };
   const [visible, setVisible] = useState(false);
 
-  const availableTypess = ["SlimFit", "RegularFit", "SkinnyFit"];
+  const availableTypess = ["Slim Fit", "Regular Fit", "Skinny Fit"];
   const [typeSelected, setTypeSelected] = useState("");
   const addTypeToProduct = (itemType) => {
     console.log("Adding type to product : " + itemType);

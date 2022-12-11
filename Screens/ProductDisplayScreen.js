@@ -11,7 +11,6 @@ import SizeModalNew from "../Components/SizeModalNew";
 import ProductDescriptionCard from "../Components/ProductDescriptionCard";
 import CommentsSection from "../Components/CommentsSection";
 import RatingsSection from "../Components/RatingsSection";
-import SimilarItemsModal from "../Components/SimilarItemsModal";
 
 const ProductDisplayScreen = ({ route }) => {
   console.log("Inside ProductDisplayScreen");
@@ -40,7 +39,6 @@ const ProductDisplayScreen = ({ route }) => {
     setAddToCart(value);
   };
 
-  const similarItemsModalRef = useRef();
   const sizeModalRef = useRef();
 
   return (
@@ -58,16 +56,6 @@ const ProductDisplayScreen = ({ route }) => {
             indicatorInActiveColor={"#ffffff"}
             indicatorActiveWidth={30}
             animation
-          />
-        </View>
-
-        <View style={styles.viewSimilarButton}>
-          <MaterialCommunityIcons
-            style={styles.viewSimilarContainer}
-            name="view-carousel-outline"
-            size={30}
-            color="black"
-            onPress={() => similarItemsModalRef.current.showModal()}
           />
         </View>
 
@@ -113,7 +101,6 @@ const ProductDisplayScreen = ({ route }) => {
         </View>
       </View>
       <SizeModalNew ref={sizeModalRef} item={item} test={setAddToCartHandler} />
-      <SimilarItemsModal ref={similarItemsModalRef} style={{ height: "30%" }} />
     </>
   );
 };
@@ -164,9 +151,7 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "black",
   },
-  similarItems: {
-    top: 40,
-  },
+
   viewSimilarButton: {
     marginTop: -40,
     zIndex: 1,

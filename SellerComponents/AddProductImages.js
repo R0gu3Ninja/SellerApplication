@@ -63,6 +63,7 @@ const AddProductImages = () => {
     console.log("productImagesForPublishing :: ");
 
     const productDetailsRef = firebase.firestore().collection("ProductDetails");
+    const orderHistoryRef = firebase.firestore().collection("OrderHistory");
     const productData = {
       category: productDetailsForPublishing[0],
       size: productDetailsForPublishing[1],
@@ -74,7 +75,9 @@ const AddProductImages = () => {
       image2: productImagesForPublishing[1],
       shopId: "12345",
       shopName: "XLent",
+      productId: "12345",
       shopDescription: "Good Place for quality TShirts,Shirts and Men Wear",
+      userId: "12345",
       /*commentsSection: [
         {
           comment1: ["Very Good Product ", 5, "JB"],
@@ -100,6 +103,7 @@ const AddProductImages = () => {
       ],*/
     };
     productDetailsRef.add(productData).catch((error) => console.log(error));
+
     navigation.navigate("HomeScreen");
   };
 

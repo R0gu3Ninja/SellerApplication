@@ -18,15 +18,15 @@ const ColorsModal = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);
 
   const availableColors = [
-    "RED",
-    "BLUE",
-    "BLACK",
-    "WHITE",
-    "GREY",
-    "YELLOW",
-    "PINK",
-    "GREEN",
-    "BROWN",
+    "Red",
+    "Blue",
+    "Black",
+    "White",
+    "Grey",
+    "Yellow",
+    "Pink",
+    "Green",
+    "Brown",
   ];
   const [colorSelected, setcolorSelected] = useState("");
   const [handler, setHandler] = useState();

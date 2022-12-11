@@ -1,12 +1,10 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
-import MyPhoto from "../Images/5star.png";
-import userImages from "../Images/userImages.png";
+
 const CommentCard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.rateSection}>
-        <Image style={styles.ratingImage} source={MyPhoto}></Image>
         <Text style={styles.posted}>a month ago</Text>
       </View>
       <View style={styles.comment}>
@@ -17,11 +15,6 @@ const CommentCard = () => {
       </View>
       <View style={styles.sizeSection}>
         <Text>Size bought : XXL</Text>
-      </View>
-      <View style={styles.userImageSection}>
-        <Image style={styles.userImages} source={userImages}></Image>
-        <Image style={styles.userImages} source={userImages}></Image>
-        <Image style={styles.userImages} source={userImages}></Image>
       </View>
 
       <View style={styles.userName}>
