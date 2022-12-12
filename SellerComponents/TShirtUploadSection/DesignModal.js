@@ -24,6 +24,7 @@ const DesignModal = forwardRef((props, ref) => {
     console.log("Adding size to product : " + itemDesign);
     setDesignSelected(itemDesign);
     addDesignToProductBuilder(itemDesign);
+    props.getDesignFromModal(itemDesign);
     hideModal();
   };
 

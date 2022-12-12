@@ -29,10 +29,11 @@ const ColorsModal = forwardRef((props, ref) => {
     "Brown",
   ];
   const [colorSelected, setcolorSelected] = useState("");
-  const [handler, setHandler] = useState();
+
   const addColorToProduct = (itemColor) => {
     setcolorSelected(itemColor);
     addColorToProductBuilder(itemColor);
+    props.getColorFromModal(itemColor);
     hideModal();
   };
 

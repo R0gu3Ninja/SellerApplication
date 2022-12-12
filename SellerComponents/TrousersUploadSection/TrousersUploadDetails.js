@@ -1,7 +1,6 @@
 import { Text, View, Pressable, StyleSheet, TextInput } from "react-native";
 import { useState, useRef } from "react";
 import ColorsModal from "./ColorsModal";
-import CollarModal from "./CollarModal";
 import FabricModal from "./FabricModal";
 import TypesModal from "./TypesModal";
 import DesignModal from "./DesignModal";
@@ -9,15 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProductDetails } from "../../Store/productDetails";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
-const TShirtUploadDetails = () => {
-  const SizeOptions = ({ sizeOption, onPress }) => {
-    return (
-      <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
-        <Text style={styles.textStyle}>{sizeOption}</Text>
-      </Pressable>
-    );
-  };
-  const availableSizes = ["S", "M", "L", "XL", "XXL"];
+const TrousersUploadDetails = () => {
+  const ColorsModalRef = useRef();
+  const TypesModalRef = useRef();
+  const DesignModalRef = useRef();
+
+  const FabricModalRef = useRef();
+  const availableSizes = ["28", "30", "32", "34", "36"];
   const [sizeSelected, setSelectedSize] = useState(false);
   const [actualPrice, setActualPrice] = useState("");
   const [discountPrice, setDiscountPrice] = useState("");
@@ -25,11 +22,18 @@ const TShirtUploadDetails = () => {
   const [colorSelected, setColorSelected] = useState("");
   const [typeSelected, setTypeSelected] = useState("");
   const [designSelected, setDesignSelected] = useState("");
-  const [collarSelected, setCollarSelected] = useState("");
   const [fabricSelected, setFabricSelected] = useState("");
-  const [price, setPrice] = useState("");
+
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const SizeOptions = ({ sizeOption, onPress }) => {
+    return (
+      <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
+        <Text style={styles.textStyle}>{sizeOption}</Text>
+      </Pressable>
+    );
+  };
 
   const addSizeToProduct = (itemSize) => {
     console.log("Adding size to product : " + itemSize);
@@ -39,7 +43,7 @@ const TShirtUploadDetails = () => {
   };
 
   const addCategoryToProductBuilder = () => {
-    dispatch(addProductDetails({ item: "TSHIRT", key: 0 }));
+    dispatch(addProductDetails({ item: "TROUSERS", key: 0 }));
   };
   const addSizeToProductBuilder = (item) => {
     console.log("Adding Size: " + item);
@@ -58,28 +62,7 @@ const TShirtUploadDetails = () => {
     dispatch(addProductDetails({ item: discountPrice, key: 8 }));
     dispatch(addProductDetails({ item: discountPercentage, key: 9 }));
   };
-  const ColorsModalRef = useRef();
-  const TypesModalRef = useRef();
-  const DesignModalRef = useRef();
-  const CollarModalRef = useRef();
-  const FabricModalRef = useRef();
-  const openTypesModal = () => {
-    TypesModalRef.current.showModal();
-  };
 
-  const openColorsModal = () => {
-    ColorsModalRef.current.showModal();
-  };
-
-  const openDesignModal = () => {
-    DesignModalRef.current.showModal();
-  };
-  const openFabricModal = () => {
-    FabricModalRef.current.showModal();
-  };
-  const openCollarModal = () => {
-    CollarModalRef.current.showModal();
-  };
   const getColorFromModal = (colorFromModal) => {
     console.log(colorFromModal);
     setColorSelected(colorFromModal);
@@ -94,13 +77,24 @@ const TShirtUploadDetails = () => {
     setDesignSelected(designFromModal);
   };
 
-  const getCollarFromModal = (collarFromModal) => {
-    setCollarSelected(collarFromModal);
-  };
-
   const getFabricFromModal = (fabricFromModal) => {
     setFabricSelected(fabricFromModal);
   };
+  const openTypesModal = () => {
+    TypesModalRef.current.showModal();
+  };
+
+  const openColorsModal = () => {
+    ColorsModalRef.current.showModal();
+  };
+
+  const openDesignModal = () => {
+    DesignModalRef.current.showModal();
+  };
+  const openFabricModal = () => {
+    FabricModalRef.current.showModal();
+  };
+
   return (
     <View>
       <View style={styles.sizeDisplay}>
@@ -126,7 +120,7 @@ const TShirtUploadDetails = () => {
           {typeSelected.length > 0 ? (
             <Text style={styles.textStyle}>{typeSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Type</Text>
           )}
         </Pressable>
       </View>
@@ -135,7 +129,7 @@ const TShirtUploadDetails = () => {
           {designSelected.length > 0 ? (
             <Text style={styles.textStyle}>{designSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Design</Text>
           )}
         </Pressable>
       </View>
@@ -144,16 +138,7 @@ const TShirtUploadDetails = () => {
           {fabricSelected.length > 0 ? (
             <Text style={styles.textStyle}>{fabricSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
-          )}
-        </Pressable>
-      </View>
-      <View>
-        <Pressable onPress={openCollarModal}>
-          {collarSelected.length > 0 ? (
-            <Text style={styles.textStyle}>{collarSelected}</Text>
-          ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Fabric</Text>
           )}
         </Pressable>
       </View>
@@ -181,21 +166,19 @@ const TShirtUploadDetails = () => {
           Set Discount Price
         </Button>
       </View>
+
       <Pressable
         style={[styles.button, styles.buttonClose]}
         onPress={() => navigation.navigate("AddProductImages")}
       >
         <Text style={styles.textStyle}>Add Images</Text>
       </Pressable>
+
       <ColorsModal ref={ColorsModalRef} getColorFromModal={getColorFromModal} />
       <TypesModal ref={TypesModalRef} getTypeFromModal={getTypeFromModal} />
       <DesignModal
         ref={DesignModalRef}
         getDesignFromModal={getDesignFromModal}
-      />
-      <CollarModal
-        ref={CollarModalRef}
-        getCollarFromModal={getCollarFromModal}
       />
       <FabricModal
         ref={FabricModalRef}
@@ -278,4 +261,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-export default TShirtUploadDetails;
+export default TrousersUploadDetails;

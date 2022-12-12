@@ -7,7 +7,7 @@ import DesignModal from "./DesignModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDetails } from "../../Store/productDetails";
 import { useNavigation } from "@react-navigation/native";
-
+import { Button } from "react-native-paper";
 const JeansUploadDetails = () => {
   const ColorsModalRef = useRef();
   const TypesModalRef = useRef();
@@ -19,6 +19,11 @@ const JeansUploadDetails = () => {
   const [actualPrice, setActualPrice] = useState("");
   const [discountPrice, setDiscountPrice] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState("");
+  const [colorSelected, setColorSelected] = useState("");
+  const [typeSelected, setTypeSelected] = useState("");
+  const [designSelected, setDesignSelected] = useState("");
+  const [collarSelected, setCollarSelected] = useState("");
+  const [fabricSelected, setFabricSelected] = useState("");
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -45,16 +50,37 @@ const JeansUploadDetails = () => {
     console.log("Adding Size: " + item);
     dispatch(addProductDetails({ item: item, key: 1 }));
   };
-  const addPriceToProductBuilder = (item) => {
+  const addActualPriceToProductBuilder = (item) => {
     console.log("Adding Price: " + item);
     dispatch(addProductDetails({ item: item, key: 5 }));
   };
-
-  const calculateDiscountPrice = (discount) => {
-    console.log("Adding Price: " + item);
-    dispatch(addProductDetails({ item: item, key: 5 }));
+  const addDiscountPriceToProductBuilder = (discountPrice) => {
+    console.log("Adding Discount Price: " + discountPrice);
+    setDiscountPrice(discountPrice);
+    let discountPercentage = Math.floor(
+      ((actualPrice - discountPrice) / actualPrice) * 100
+    );
+    dispatch(addProductDetails({ item: discountPrice, key: 8 }));
+    dispatch(addProductDetails({ item: discountPercentage, key: 9 }));
   };
 
+  const getColorFromModal = (colorFromModal) => {
+    console.log(colorFromModal);
+    setColorSelected(colorFromModal);
+  };
+
+  const getTypeFromModal = (typeFromModal) => {
+    console.log(typeFromModal);
+    setTypeSelected(typeFromModal);
+  };
+
+  const getDesignFromModal = (designFromModal) => {
+    setDesignSelected(designFromModal);
+  };
+
+  const getFabricFromModal = (fabricFromModal) => {
+    setFabricSelected(fabricFromModal);
+  };
   const openTypesModal = () => {
     TypesModalRef.current.showModal();
   };
@@ -68,9 +94,6 @@ const JeansUploadDetails = () => {
   };
   const openFabricModal = () => {
     FabricModalRef.current.showModal();
-  };
-  const openCollarModal = () => {
-    CollarModalRef.current.showModal();
   };
 
   return (
@@ -86,67 +109,82 @@ const JeansUploadDetails = () => {
       </View>
       <View>
         <Pressable onPress={openColorsModal}>
-          <Text style={styles.textStyle}>Select Color</Text>
+          {colorSelected.length > 0 ? (
+            <Text style={styles.textStyle}>{colorSelected}</Text>
+          ) : (
+            <Text style={styles.textStyle}>Select Color</Text>
+          )}
         </Pressable>
       </View>
       <View>
         <Pressable onPress={openTypesModal}>
-          <Text style={styles.textStyle}>Select Type</Text>
+          {typeSelected.length > 0 ? (
+            <Text style={styles.textStyle}>{typeSelected}</Text>
+          ) : (
+            <Text style={styles.textStyle}>Select Type</Text>
+          )}
         </Pressable>
       </View>
       <View>
         <Pressable onPress={openDesignModal}>
-          <Text style={styles.textStyle}>Select Design</Text>
+          {designSelected.length > 0 ? (
+            <Text style={styles.textStyle}>{designSelected}</Text>
+          ) : (
+            <Text style={styles.textStyle}>Select Design</Text>
+          )}
         </Pressable>
       </View>
       <View>
         <Pressable onPress={openFabricModal}>
-          <Text style={styles.textStyle}>Select Fabric</Text>
+          {fabricSelected.length > 0 ? (
+            <Text style={styles.textStyle}>{fabricSelected}</Text>
+          ) : (
+            <Text style={styles.textStyle}>Select Fabric</Text>
+          )}
         </Pressable>
       </View>
-      <View>
-        <Pressable onPress={openCollarModal}>
-          <Text style={styles.textStyle}>Select Collar</Text>
-        </Pressable>
+      <View style={styles.amountSection}>
+        <TextInput
+          style={styles.input}
+          onChangeText={setActualPrice}
+          value={actualPrice}
+          placeholder="Actual Price"
+          keyboardType="numeric"
+        />
+        <Button onPress={() => addActualPriceToProductBuilder(actualPrice)}>
+          Set Price
+        </Button>
       </View>
-      <TextInput
-        style={styles.input}
-        onChangeText={setActualPrice}
-        value={actualPrice}
-        placeholder="Actual Price"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setDiscountPrice}
-        value={discountPrice}
-        placeholder="Discount price"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={() => calculateDiscountPrice()}
-        value={discountPercentage}
-        placeholder="Discount %"
-        keyboardType="numeric"
-      />
-      <Pressable
-        style={[styles.button, styles.buttonClose]}
-        onPress={() => addPriceToProductBuilder(price)}
-      >
-        <Text style={styles.textStyle}>Add Price</Text>
-      </Pressable>
+      <View style={styles.amountSection}>
+        <TextInput
+          style={styles.input}
+          onChangeText={setDiscountPrice}
+          value={discountPrice}
+          placeholder="Discount price"
+          keyboardType="numeric"
+        />
+        <Button onPress={() => addDiscountPriceToProductBuilder(discountPrice)}>
+          Set Discount Price
+        </Button>
+      </View>
+
       <Pressable
         style={[styles.button, styles.buttonClose]}
         onPress={() => navigation.navigate("AddProductImages")}
       >
         <Text style={styles.textStyle}>Add Images</Text>
       </Pressable>
-      <ColorsModal ref={ColorsModalRef} />
-      <TypesModal ref={TypesModalRef} />
-      <DesignModal ref={DesignModalRef} />
 
-      <FabricModal ref={FabricModalRef} />
+      <ColorsModal ref={ColorsModalRef} getColorFromModal={getColorFromModal} />
+      <TypesModal ref={TypesModalRef} getTypeFromModal={getTypeFromModal} />
+      <DesignModal
+        ref={DesignModalRef}
+        getDesignFromModal={getDesignFromModal}
+      />
+      <FabricModal
+        ref={FabricModalRef}
+        getFabricFromModal={getFabricFromModal}
+      />
     </View>
   );
 };
@@ -161,6 +199,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    width: 150,
   },
   sizeView: {
     margin: 20,
@@ -218,6 +257,9 @@ const styles = StyleSheet.create({
     maxHeight: 70,
     borderRadius: 400 / 2,
     justifyContent: "flex-start",
+  },
+  amountSection: {
+    flexDirection: "row",
   },
 });
 export default JeansUploadDetails;

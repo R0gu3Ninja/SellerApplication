@@ -24,6 +24,7 @@ const FabricModal = forwardRef((props, ref) => {
     console.log("Adding type to product : " + fabricType);
     setFabricSelected(fabricType);
     addFabricToProductBuilder(fabricType);
+    props.getFabricFromModal(fabricType);
     hideModal();
   };
 

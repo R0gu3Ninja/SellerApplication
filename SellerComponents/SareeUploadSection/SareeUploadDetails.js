@@ -1,4 +1,5 @@
 import { Text, View, Pressable, StyleSheet, TextInput } from "react-native";
+import { Button } from "react-native-paper";
 import { useState, useRef } from "react";
 import ColorsModal from "./ColorsModal";
 import CollarModal from "./CollarModal";
@@ -8,8 +9,8 @@ import DesignModal from "./DesignModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDetails } from "../../Store/productDetails";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-paper";
-const TShirtUploadDetails = () => {
+
+const SareeUploadDetails = () => {
   const SizeOptions = ({ sizeOption, onPress }) => {
     return (
       <Pressable style={[styles.button, styles.buttonClose]} onPress={onPress}>
@@ -27,7 +28,6 @@ const TShirtUploadDetails = () => {
   const [designSelected, setDesignSelected] = useState("");
   const [collarSelected, setCollarSelected] = useState("");
   const [fabricSelected, setFabricSelected] = useState("");
-  const [price, setPrice] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -39,7 +39,7 @@ const TShirtUploadDetails = () => {
   };
 
   const addCategoryToProductBuilder = () => {
-    dispatch(addProductDetails({ item: "TSHIRT", key: 0 }));
+    dispatch(addProductDetails({ item: "SAREE", key: 0 }));
   };
   const addSizeToProductBuilder = (item) => {
     console.log("Adding Size: " + item);
@@ -57,6 +57,28 @@ const TShirtUploadDetails = () => {
     );
     dispatch(addProductDetails({ item: discountPrice, key: 8 }));
     dispatch(addProductDetails({ item: discountPercentage, key: 9 }));
+  };
+
+  const getColorFromModal = (colorFromModal) => {
+    console.log(colorFromModal);
+    setColorSelected(colorFromModal);
+  };
+
+  const getTypeFromModal = (typeFromModal) => {
+    console.log(typeFromModal);
+    setTypeSelected(typeFromModal);
+  };
+
+  const getDesignFromModal = (designFromModal) => {
+    setDesignSelected(designFromModal);
+  };
+
+  const getCollarFromModal = (collarFromModal) => {
+    setCollarSelected(collarFromModal);
+  };
+
+  const getFabricFromModal = (fabricFromModal) => {
+    setFabricSelected(fabricFromModal);
   };
   const ColorsModalRef = useRef();
   const TypesModalRef = useRef();
@@ -80,27 +102,7 @@ const TShirtUploadDetails = () => {
   const openCollarModal = () => {
     CollarModalRef.current.showModal();
   };
-  const getColorFromModal = (colorFromModal) => {
-    console.log(colorFromModal);
-    setColorSelected(colorFromModal);
-  };
 
-  const getTypeFromModal = (typeFromModal) => {
-    console.log(typeFromModal);
-    setTypeSelected(typeFromModal);
-  };
-
-  const getDesignFromModal = (designFromModal) => {
-    setDesignSelected(designFromModal);
-  };
-
-  const getCollarFromModal = (collarFromModal) => {
-    setCollarSelected(collarFromModal);
-  };
-
-  const getFabricFromModal = (fabricFromModal) => {
-    setFabricSelected(fabricFromModal);
-  };
   return (
     <View>
       <View style={styles.sizeDisplay}>
@@ -126,7 +128,7 @@ const TShirtUploadDetails = () => {
           {typeSelected.length > 0 ? (
             <Text style={styles.textStyle}>{typeSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Type</Text>
           )}
         </Pressable>
       </View>
@@ -135,7 +137,7 @@ const TShirtUploadDetails = () => {
           {designSelected.length > 0 ? (
             <Text style={styles.textStyle}>{designSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Design</Text>
           )}
         </Pressable>
       </View>
@@ -144,7 +146,7 @@ const TShirtUploadDetails = () => {
           {fabricSelected.length > 0 ? (
             <Text style={styles.textStyle}>{fabricSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Fabric</Text>
           )}
         </Pressable>
       </View>
@@ -153,7 +155,7 @@ const TShirtUploadDetails = () => {
           {collarSelected.length > 0 ? (
             <Text style={styles.textStyle}>{collarSelected}</Text>
           ) : (
-            <Text style={styles.textStyle}>Select Color</Text>
+            <Text style={styles.textStyle}>Select Collar</Text>
           )}
         </Pressable>
       </View>
@@ -278,4 +280,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-export default TShirtUploadDetails;
+export default SareeUploadDetails;

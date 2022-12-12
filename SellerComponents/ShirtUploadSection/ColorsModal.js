@@ -33,6 +33,7 @@ const ColorsModal = forwardRef((props, ref) => {
   const addColorToProduct = (itemColor) => {
     setcolorSelected(itemColor);
     addColorToProductBuilder(itemColor);
+    props.getColorFromModal(itemColor);
     hideModal();
   };
 

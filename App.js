@@ -1,23 +1,26 @@
 import "react-native-gesture-handler";
 import "expo-dev-client";
-
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
-import CategoryDisplayScreen from "./Screens/CategoryDisplayScreen";
 import AddProductImages from "./SellerComponents/AddProductImages";
-import ShopDisplayScreen from "./Screens/ShopDisplayScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import HeaderIcons from "./Components/HeaderIcons";
 import logo from "./local.jpg";
+import Cart from "./Components/Cart";
 import ShirtUploadDetails from "./SellerComponents/ShirtUploadSection/ShirtUploadDetails";
 import TShirtUploadDetails from "./SellerComponents/TShirtUploadSection/TShirtUploadDetails";
 import JeansUploadDetails from "./SellerComponents/JeansUploadSection/JeansUploadDetails";
-import AddProductModal from "./SellerComponents/AddProductModal";
-import Cart from "./Components/Cart";
+import SareeUploadDetails from "./SellerComponents/SareeUploadSection/SareeUploadDetails";
+import KurtasUploadDetails from "./SellerComponents/KurtasUploadSection/KurtasUploadDetails";
+import TopsUploadDetails from "./SellerComponents/TopsUploadSection/TopsUploadDetails";
+import ShortsUploadDetails from "./SellerComponents/ShortsUploadSection/ShortsUploadDetails";
+import TracksUploadDetails from "./SellerComponents/TracksUploadSection/TracksUploadDetails";
+import TrousersUploadDetails from "./SellerComponents/TrousersUploadSection/TrousersUploadDetails";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
 import AccountScreen from "./Components/AccountScreen";
 import {
   Foundation,
@@ -26,13 +29,9 @@ import {
 } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import globalStore from "./Store/index";
-
 import Camera from "./Camera/Camera";
-import { useNavigation } from "@react-navigation/native";
 import Fetch from "./Components/Fetch";
 import RatingsSection from "./Components/RatingsSection";
-import StarRating from "./Components/StarRating";
-import CommentCard from "./Components/CommentCard";
 import FireTest from "./Components/FireTest";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -181,6 +180,27 @@ const MainNavigator = () => {
         <Stack.Screen
           name="ShirtUploadDetails"
           component={ShirtUploadDetails}
+        />
+        <Stack.Screen
+          name="SareeUploadDetails"
+          component={SareeUploadDetails}
+        />
+        <Stack.Screen
+          name="TrousersUploadDetails"
+          component={TrousersUploadDetails}
+        />
+        <Stack.Screen name="TopsUploadDetails" component={TopsUploadDetails} />
+        <Stack.Screen
+          name="KurtasUploadDetails"
+          component={KurtasUploadDetails}
+        />
+        <Stack.Screen
+          name="ShortsUploadDetails"
+          component={ShortsUploadDetails}
+        />
+        <Stack.Screen
+          name="TracksUploadDetails"
+          component={TracksUploadDetails}
         />
 
         <Stack.Screen name="Cart" component={Cart} />

@@ -23,6 +23,7 @@ const CollarModal = forwardRef((props, ref) => {
     console.log("Adding type to product : " + collarType);
     setTypeSelected(collarType);
     addCollarToProductBuilder(collarType);
+    props.getCollarFromModal(collarType);
     hideModal();
   };
 

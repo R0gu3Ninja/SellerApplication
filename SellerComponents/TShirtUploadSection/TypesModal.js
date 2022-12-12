@@ -24,6 +24,7 @@ const TypesModal = forwardRef((props, ref) => {
     console.log("Adding type to product : " + itemType);
     setTypeSelected(itemType);
     addTypeToProductBuilder(itemType);
+    props.getTypeFromModal(itemType);
     hideModal();
   };
 

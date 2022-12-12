@@ -63,21 +63,23 @@ const AddProductImages = () => {
     console.log("productImagesForPublishing :: ");
 
     const productDetailsRef = firebase.firestore().collection("ProductDetails");
-    const orderHistoryRef = firebase.firestore().collection("OrderHistory");
+    let uploadedOn = new Date().toISOString().slice(0, 10);
     const productData = {
       category: productDetailsForPublishing[0],
       size: productDetailsForPublishing[1],
       color: productDetailsForPublishing[2],
       type: productDetailsForPublishing[3],
       design: productDetailsForPublishing[4],
-      price: productDetailsForPublishing[5],
+      actualPrice: productDetailsForPublishing[5],
+      discountPrice: productDetailsForPublishing[8],
+      discountPercentage: productDetailsForPublishing[9],
       image1: productImagesForPublishing[0],
       image2: productImagesForPublishing[1],
       shopId: "12345",
       shopName: "XLent",
-      productId: "12345",
+      productId: "12345" + new Date().toISOString(),
       shopDescription: "Good Place for quality TShirts,Shirts and Men Wear",
-      userId: "12345",
+      uploadedOn: new Date().toISOString().slice(0, 10),
       /*commentsSection: [
         {
           comment1: ["Very Good Product ", 5, "JB"],

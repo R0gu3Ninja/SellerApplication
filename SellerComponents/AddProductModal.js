@@ -45,6 +45,10 @@ const AddProductModal = forwardRef((props, ref) => {
               productOption="Trousers"
               onPress={() => navigation.navigate("TrousersUploadDetails")}
             ></ModalOptions>
+            <ModalOptions
+              productOption="Saree"
+              onPress={() => navigation.navigate("SareeUploadDetails")}
+            ></ModalOptions>
           </View>
         </Modal>
       </Portal>
