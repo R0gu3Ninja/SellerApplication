@@ -2,7 +2,6 @@ import { Text, View, Pressable, StyleSheet, TextInput } from "react-native";
 import { Button } from "react-native-paper";
 import { useState, useRef } from "react";
 import ColorsModal from "./ColorsModal";
-import CollarModal from "./CollarModal";
 import FabricModal from "./FabricModal";
 import TypesModal from "./TypesModal";
 import DesignModal from "./DesignModal";

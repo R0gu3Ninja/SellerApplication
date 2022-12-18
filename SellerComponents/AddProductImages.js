@@ -59,11 +59,17 @@ const AddProductImages = () => {
   const displayImagesSection = (newImage) => {
     setDisplayImages((prevImgs) => [...prevImgs, newImage]);
   };
+
+  const shopId = useSelector((state) => state.shopProfileReducer.shopId);
+  const shopName = useSelector((state) => state.shopProfileReducer.shopName);
+  const shopDescription = useSelector(
+    (state) => state.shopProfileReducer.shopDescription
+  );
+
   const publishToStore = () => {
     console.log("productImagesForPublishing :: ");
 
     const productDetailsRef = firebase.firestore().collection("ProductDetails");
-    let uploadedOn = new Date().toISOString().slice(0, 10);
     const productData = {
       category: productDetailsForPublishing[0],
       size: productDetailsForPublishing[1],
@@ -75,34 +81,18 @@ const AddProductImages = () => {
       discountPercentage: productDetailsForPublishing[9],
       image1: productImagesForPublishing[0],
       image2: productImagesForPublishing[1],
-      shopId: "12345",
-      shopName: "XLent",
-      productId: "12345" + new Date().toISOString(),
-      shopDescription: "Good Place for quality TShirts,Shirts and Men Wear",
+      shopId: shopId,
+      shopName: shopName,
+      productId: shopId + new Date().toISOString(),
+      shopDescription: shopDescription,
       uploadedOn: new Date().toISOString().slice(0, 10),
-      /*commentsSection: [
-        {
-          comment1: ["Very Good Product ", 5, "JB"],
-          comment2: ["Okay ", 4, "RP"],
-          comment3: ["Not BAd ", 3, "SI"],
-         comment2: [
-            { comment: "Nice Fit " },
-            { raing: 2 },
-            { user: "Rathode" },
-          ],
-          comment3: [
-            { comment: "Good, Very Very Good Product " },
-            { raing: 3 },
-            { user: "Appu" },
-          ],
-          comment4: [{ comment: "Wow" }, { raing: 4 }, { user: "Ishu" }],
-          comment5: [
-            { comment: "Poor Quality" },
-            { raing: 1 },
-            { user: "Renu" },
-          ],
-        },
-      ],*/
+      FiveStarReviews: 1,
+      FourStarReviews: 0,
+      ThreeStarReviews: 0,
+      TwoStarReviews: 0,
+      OneStarReviews: 0,
+      noOfReviews: 1,
+      productRating: 5,
     };
     productDetailsRef.add(productData).catch((error) => console.log(error));
 
